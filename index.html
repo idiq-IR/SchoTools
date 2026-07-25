@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="h-full">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SchoTools Premium Suite - XI TKJ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>SchoTools Premium Suite - XI TKJ SMKN 11 Bandung</title>
   <!-- Tailwind CSS CDN Framework -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -12,13 +12,15 @@
       theme: {
         extend: {
           colors: {
-            brandPrimary: '#2F6FDE',
-            brandSecondary: '#3BA8C9',
-            brandAccent: '#D9A441',
-            statusSuccess: '#3FAE6A',
-            statusWarning: '#E8A63B',
-            statusError: '#D9534F',
-            statusInfo: '#3BA8C9'
+            brandPrimary: '#3B82F6',
+            brandSecondary: '#06B6D4',
+            brandAccent: '#F59E0B',
+            statusSuccess: '#10B981',
+            statusWarning: '#F59E0B',
+            statusError: '#EF4444',
+            darkBg: '#090D16',
+            darkCard: '#131C2E',
+            darkBorder: '#233148'
           }
         }
       }
@@ -26,975 +28,1418 @@
   </script>
   <style>
     .animate-popup {
-      animation: popupIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: popupIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
     @keyframes popupIn {
-      0% { transform: scale(0.95) translateY(6px); opacity: 0; }
+      0% { transform: scale(0.95) translateY(8px); opacity: 0; }
       100% { transform: scale(1) translateY(0); opacity: 1; }
     }
     .custom-scrollbar::-webkit-scrollbar {
       width: 5px;
+      height: 5px;
     }
-    body.dark .custom-scrollbar::-webkit-scrollbar-track { background: #111827; }
-    body.dark .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; rounded: 10px; }
-    body:not(.dark) .custom-scrollbar::-webkit-scrollbar-track { background: #EEF3F8; }
-    body:not(.dark) .custom-scrollbar::-webkit-scrollbar-thumb { background: #D6DEE8; rounded: 10px; }
+    body.dark .custom-scrollbar::-webkit-scrollbar-track { background: #090D16; }
+    body.dark .custom-scrollbar::-webkit-scrollbar-thumb { background: #233148; border-radius: 9999px; }
+    body:not(.dark) .custom-scrollbar::-webkit-scrollbar-track { background: #F1F5F9; }
+    body:not(.dark) .custom-scrollbar::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 9999px; }
+    
+    /* Mobile Touch Controls Optimization */
+    button, select, input, textarea {
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    body {
+      background-color: #F1F5F9;
+      color: #0F172A;
+    }
+    body.dark {
+      background-color: #090D16;
+      color: #F8FAFC;
+    }
   </style>
 </head>
-<body class="transition-colors duration-300 min-h-screen flex flex-col relative overflow-x-hidden bg-[#F4F7FA] text-[#1E293B]">
+<body class="transition-colors duration-300 min-h-full flex flex-col relative overflow-x-hidden antialiased">
 
-  <!-- Canvas Background for Floating Particles -->
-  <div class="absolute inset-0 z-0 pointer-events-none">
-    <canvas id="particleCanvas" class="w-full h-full block opacity-75"></canvas>
+  <!-- Background Particle Canvas -->
+  <div class="fixed inset-0 z-0 pointer-events-none">
+    <canvas id="particleCanvas" class="w-full h-full block opacity-70 dark:opacity-30"></canvas>
   </div>
 
-  <!-- Header Section -->
-  <header class="relative z-10 border-b border-[#D6DEE8] dark:border-[#334155] bg-white/85 dark:bg-[#1E293B]/85 backdrop-blur-md sticky top-0 px-4 py-4 sm:px-8 shadow-sm">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-      <div class="flex items-center gap-3">
-        <div class="relative flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-tr from-brandPrimary to-brandSecondary shadow-md">
-          <span class="text-white font-black text-lg">ST</span>
+  <header class="relative z-20 border-b border-[#CBD5E1] dark:border-darkBorder bg-white/90 dark:bg-darkCard/90 backdrop-blur-md sticky top-0 px-3 sm:px-8 py-3 shadow-sm transition-colors duration-300">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
+      
+      <div class="flex items-center justify-between w-full md:w-auto gap-3">
+        <div class="flex items-center gap-2.5">
+          <div class="relative flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-tr from-brandPrimary to-brandSecondary shadow-md shrink-0">
+            <span class="text-white font-black text-base sm:text-lg tracking-wider">ST</span>
+          </div>
+          <div>
+            <h1 class="text-base sm:text-xl font-extrabold tracking-tight text-[#0F172A] dark:text-[#F8FAFC]">
+              SCHOTOOLS <span class="bg-gradient-to-r from-brandPrimary to-brandSecondary bg-clip-text text-transparent">PREMIUM</span>
+            </h1>
+            <p class="text-[9px] sm:text-[10px] text-[#64748B] dark:text-[#94A3B8] uppercase tracking-widest font-black">XI TKJ • SMKN 11 BANDUNG</p>
+          </div>
         </div>
-        <div>
-          <h1 class="text-xl font-extrabold tracking-tight dark:text-[#F8FAFC]">
-            SCHOTOOLS <span class="bg-gradient-to-r from-brandPrimary to-brandSecondary bg-clip-text text-transparent">PREMIUM</span>
-          </h1>
-          <p class="text-[10px] text-[#64748B] dark:text-[#CBD5E1] uppercase tracking-widest font-black">XI TKJ Offline Manager Suite</p>
+
+        <!-- Mobile Settings Trigger -->
+        <div class="flex md:hidden items-center border border-[#CBD5E1] dark:border-darkBorder rounded-xl px-2 py-1 bg-[#F8FAFC] dark:bg-[#090D16]">
+          <button onclick="ThemeEngine.toggle()" class="p-1.5 rounded-lg text-brandAccent font-bold text-xs active:scale-95 transition" title="Ganti Mode Terang/Gelap">☀️/🌙</button>
         </div>
       </div>
 
-      <!-- Navigation System -->
-      <nav class="flex flex-wrap p-1 bg-[#EEF3F8] dark:bg-[#111827] border border-[#D6DEE8] dark:border-[#334155] rounded-xl gap-1">
-        <button id="navBtn-absen" onclick="switchTab('absen')" class="px-4 py-2 rounded-lg text-xs font-bold transition-all bg-brandPrimary text-white shadow-sm">ABSEN</button>
-        <button id="navBtn-spin" onclick="switchTab('spin')" class="px-4 py-2 rounded-lg text-xs font-bold transition-all text-[#64748B] dark:text-[#CBD5E1] hover:text-[#1E293B] dark:hover:text-white">SPIN</button>
-        <button id="navBtn-groups" onclick="switchTab('groups')" class="px-4 py-2 rounded-lg text-xs font-bold transition-all text-[#64748B] dark:text-[#CBD5E1] hover:text-[#1E293B] dark:hover:text-white">KELOMPOK</button>
-        <button id="navBtn-partners" onclick="switchTab('partners')" class="px-4 py-2 rounded-lg text-xs font-bold transition-all text-[#64748B] dark:text-[#CBD5E1] hover:text-[#1E293B] dark:hover:text-white">PARTNER</button>
+      <!-- Navigation Bar -->
+      <nav class="w-full md:w-auto flex overflow-x-auto p-1 bg-[#E2E8F0] dark:bg-[#090D16] border border-[#CBD5E1] dark:border-darkBorder rounded-xl gap-1 custom-scrollbar">
+        <button id="navBtn-absen" onclick="AppController.switchTab('absen')" class="flex-1 md:flex-none px-4 py-2 rounded-lg text-xs font-bold transition-all whitespace-nowrap bg-brandPrimary text-white shadow-sm active:scale-95">ABSEN</button>
+        <button id="navBtn-spin" onclick="AppController.switchTab('spin')" class="flex-1 md:flex-none px-4 py-2 rounded-lg text-xs font-bold transition-all whitespace-nowrap text-[#64748B] dark:text-[#94A3B8] hover:text-[#0F172A] dark:hover:text-white active:scale-95">SPIN</button>
+        <button id="navBtn-groups" onclick="AppController.switchTab('groups')" class="flex-1 md:flex-none px-4 py-2 rounded-lg text-xs font-bold transition-all whitespace-nowrap text-[#64748B] dark:text-[#94A3B8] hover:text-[#0F172A] dark:hover:text-white active:scale-95">KELOMPOK</button>
+        <button id="navBtn-partners" onclick="AppController.switchTab('partners')" class="flex-1 md:flex-none px-4 py-2 rounded-lg text-xs font-bold transition-all whitespace-nowrap text-[#64748B] dark:text-[#94A3B8] hover:text-[#0F172A] dark:hover:text-white active:scale-95">PARTNER</button>
       </nav>
 
-      <!-- Theme & Audio Controls -->
-      <div class="flex items-center gap-3 border border-[#D6DEE8] dark:border-[#334155] rounded-xl px-3 py-1.5 bg-white dark:bg-[#1E293B]">
-        <button onclick="toggleTheme()" class="p-1.5 rounded-lg text-brandAccent font-bold text-xs">☀️/🌙</button>
-        <div class="w-[1px] h-4 bg-[#CBD5E1] dark:bg-[#475569]"></div>
-        <button id="muteBtn" onclick="toggleMute()" class="text-xs text-brandPrimary font-bold">🔊</button>
-        <input type="range" id="volumeSlider" min="0" max="1" step="0.05" value="0.4" oninput="changeVolume(this.value)" class="w-16 accent-brandPrimary h-1 cursor-pointer bg-[#CBD5E1] dark:bg-[#475569] rounded-lg" />
+      <!-- Desktop Theme Controls -->
+      <div class="hidden md:flex items-center gap-2 border border-[#CBD5E1] dark:border-darkBorder rounded-xl px-3 py-1.5 bg-white dark:bg-darkCard">
+        <button onclick="ThemeEngine.toggle()" class="p-1 rounded-lg text-brandAccent font-bold text-xs hover:scale-105 transition-transform" title="Toggle Mode Terang/Gelap">☀️/🌙 Mode</button>
       </div>
     </div>
   </header>
 
-  <!-- Main Display Window -->
-  <main class="relative z-10 flex-grow max-w-7xl w-full mx-auto px-4 py-6 sm:px-8">
+  <main class="relative z-10 flex-grow max-w-7xl w-full mx-auto px-3 sm:px-8 py-4 sm:py-6">
     
     <!-- TAB 1: ABSEN (PRESENSI) -->
-    <div id="tabContent-absen" class="tab-view grid grid-cols-1 lg:grid-cols-12 gap-6">
+    <div id="tabContent-absen" class="tab-view grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-5">
       <div class="lg:col-span-4 space-y-4">
-        <!-- Wali Kelas info -->
-        <div class="bg-white dark:bg-[#1E293B] border border-[#D6DEE8] dark:border-[#334155] rounded-2xl p-5 relative overflow-hidden shadow-sm">
+        
+        <!-- Wali Kelas Card -->
+        <div class="bg-white dark:bg-darkCard border border-[#CBD5E1] dark:border-darkBorder rounded-2xl p-4 relative overflow-hidden shadow-sm flex items-center gap-3.5 transition-colors">
           <div class="absolute top-0 left-0 w-1.5 h-full bg-brandPrimary"></div>
-          <h3 class="text-[10px] font-black tracking-widest text-[#64748B] dark:text-[#CBD5E1] mb-1">WALI KELAS XI TKJ</h3>
-          <p class="text-base font-extrabold text-[#1E293B] dark:text-[#F8FAFC]">Heryanti Herdiani, S.T., M.M</p>
+          
+          <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-brandPrimary/10 dark:bg-brandPrimary/20 flex items-center justify-center text-brandPrimary shrink-0 text-xl font-extrabold">
+            🏫
+          </div>
+
+          <div class="min-w-0">
+            <span class="text-[9px] font-black uppercase tracking-widest text-brandPrimary bg-brandPrimary/10 dark:bg-brandPrimary/20 px-2 py-0.5 rounded-full inline-block mb-1">SMKN 11 BANDUNG</span>
+            <h3 class="text-[10px] font-black tracking-widest text-[#64748B] dark:text-[#94A3B8] uppercase">WALI KELAS XI TKJ</h3>
+            <p class="text-xs sm:text-base font-extrabold text-[#0F172A] dark:text-[#F8FAFC] truncate">Heryanti Herdiani, S.T., M.M</p>
+          </div>
         </div>
 
         <!-- Rekap Database -->
-        <div class="bg-white dark:bg-[#1E293B] border border-[#D6DEE8] dark:border-[#334155] rounded-2xl p-5 shadow-sm">
-          <h3 class="text-[10px] font-black tracking-widest text-[#64748B] dark:text-[#CBD5E1] uppercase mb-4">REKAP KEHADIRAN KELAS</h3>
-          <div class="grid grid-cols-2 gap-4 mb-4">
-            <div>
-              <p id="rekapHadirCount" class="text-3xl font-extrabold text-brandPrimary">0</p>
-              <p class="text-[10px] font-bold text-[#64748B] dark:text-[#CBD5E1]">Siswa Hadir</p>
+        <div class="bg-white dark:bg-darkCard border border-[#CBD5E1] dark:border-darkBorder rounded-2xl p-4 sm:p-5 shadow-sm transition-colors">
+          <h3 class="text-[10px] font-black tracking-widest text-[#64748B] dark:text-[#94A3B8] uppercase mb-3">REKAP KEHADIRAN KELAS</h3>
+          <div class="grid grid-cols-2 gap-3 mb-3">
+            <div class="p-3 bg-[#F1F5F9] dark:bg-[#090D16] rounded-xl border border-transparent dark:border-darkBorder">
+              <p id="rekapHadirCount" class="text-2xl sm:text-3xl font-extrabold text-brandPrimary">0</p>
+              <p class="text-[10px] font-bold text-[#64748B] dark:text-[#94A3B8]">Siswa Hadir</p>
             </div>
-            <div class="text-right">
-              <p id="rekapAbsenCount" class="text-3xl font-extrabold text-statusError">0</p>
-              <p class="text-[10px] font-bold text-[#64748B] dark:text-[#CBD5E1]">Siswa Absen</p>
+            <div class="p-3 bg-[#F1F5F9] dark:bg-[#090D16] rounded-xl text-right border border-transparent dark:border-darkBorder">
+              <p id="rekapAbsenCount" class="text-2xl sm:text-3xl font-extrabold text-statusError">0</p>
+              <p class="text-[10px] font-bold text-[#64748B] dark:text-[#94A3B8]">Siswa Absen</p>
             </div>
           </div>
-          <div class="w-full bg-[#EEF3F8] dark:bg-[#111827] rounded-full h-2 overflow-hidden mb-4">
+          <div class="w-full bg-[#E2E8F0] dark:bg-[#090D16] rounded-full h-2.5 overflow-hidden">
             <div id="rekapProgressBar" class="bg-brandPrimary h-full transition-all duration-300" style="width: 0%"></div>
           </div>
         </div>
 
         <!-- Quick Status Control -->
-        <div class="bg-white dark:bg-[#1E293B] border border-[#D6DEE8] dark:border-[#334155] rounded-2xl p-5 space-y-3 shadow-sm">
-          <h3 class="text-xs font-black tracking-widest text-[#64748B] dark:text-[#CBD5E1]">KONTROL STATUS CEPAT</h3>
+        <div class="bg-white dark:bg-darkCard border border-[#CBD5E1] dark:border-darkBorder rounded-2xl p-4 sm:p-5 space-y-3 shadow-sm transition-colors">
+          <h3 class="text-xs font-black tracking-widest text-[#64748B] dark:text-[#94A3B8]">KONTROL STATUS CEPAT</h3>
           <div class="grid grid-cols-2 gap-2">
-            <button onclick="setAllAttendance(true)" class="py-2.5 bg-brandPrimary hover:bg-[#255bc2] text-white rounded-xl text-xs font-bold transition">HADIR SEMUA</button>
-            <button onclick="setAllAttendance(false)" class="py-2.5 bg-[#D9534F]/10 text-statusError rounded-xl text-xs font-bold border border-statusError/30 transition">ABSEN SEMUA</button>
+            <button onclick="AttendanceEngine.setAll(true)" class="py-3 px-3 bg-brandPrimary hover:bg-blue-600 text-white rounded-xl text-xs font-bold transition shadow-sm active:scale-95">HADIR SEMUA</button>
+            <button onclick="AttendanceEngine.setAll(false)" class="py-3 px-3 bg-statusError/10 hover:bg-statusError/20 text-statusError rounded-xl text-xs font-bold border border-statusError/30 transition active:scale-95">ABSEN SEMUA</button>
           </div>
         </div>
       </div>
 
       <!-- Student Card List Grid -->
-      <div class="lg:col-span-8 space-y-4">
-        <input type="text" id="studentSearchInput" oninput="handleSearch(this.value)" placeholder="Cari nama siswa kelas XI TKJ..." class="w-full px-4 py-3 bg-white dark:bg-[#1E293B] border border-[#CBD5E1] dark:border-[#475569] rounded-xl text-sm text-[#1E293B] dark:text-[#F8FAFC] focus:outline-none focus:border-brandPrimary transition-colors" />
-        <div id="studentGrid" class="grid grid-cols-1 md:grid-cols-2 gap-2.5"></div>
+      <div class="lg:col-span-8 space-y-3 sm:space-y-4">
+        <div class="relative">
+          <input type="text" id="studentSearchInput" oninput="AttendanceEngine.handleSearch(this.value)" placeholder="Cari nama siswa kelas XI TKJ..." class="w-full pl-4 pr-10 py-3 bg-white dark:bg-darkCard border border-[#CBD5E1] dark:border-darkBorder rounded-xl text-xs sm:text-sm text-[#0F172A] dark:text-[#F8FAFC] focus:outline-none focus:border-brandPrimary transition-colors shadow-sm" />
+          <span class="absolute right-3.5 top-3.5 text-xs text-[#64748B] dark:text-[#94A3B8]">🔍</span>
+        </div>
+        <div id="studentGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5"></div>
       </div>
     </div>
 
     <!-- TAB 2: SPIN SYSTEM -->
-    <div id="tabContent-spin" class="tab-view hidden grid grid-cols-1 lg:grid-cols-12 gap-6">
+    <div id="tabContent-spin" class="tab-view hidden grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-5">
       <div class="lg:col-span-3 flex flex-col gap-4">
-        <div class="bg-white dark:bg-[#1E293B] border border-[#D6DEE8] dark:border-[#334155] rounded-2xl p-4 shadow-sm">
-          <h2 class="text-xs font-black text-[#64748B] dark:text-[#CBD5E1] mb-3">GENDER FILTER</h2>
+        <div class="bg-white dark:bg-darkCard border border-[#CBD5E1] dark:border-darkBorder rounded-2xl p-4 shadow-sm transition-colors">
+          <h2 class="text-xs font-black text-[#64748B] dark:text-[#94A3B8] mb-3">GENDER FILTER</h2>
           <div class="space-y-2">
-            <button id="filterBtn-ALL" onclick="setGenderFilter('ALL')" class="w-full flex items-center justify-between px-3 py-2 rounded-xl border text-xs font-bold transition bg-brandPrimary border-brandPrimary text-white shadow-sm">
+            <button id="filterBtn-ALL" onclick="SpinEngine.setGenderFilter('ALL')" class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl border text-xs font-bold transition bg-brandPrimary border-brandPrimary text-white shadow-sm active:scale-95">
               <span>Semua Siswa Hadir</span> <span id="count-ALL" class="px-2 py-0.5 rounded-full text-[10px] bg-white/20">0</span>
             </button>
-            <button id="filterBtn-MALE" onclick="setGenderFilter('MALE')" class="w-full flex items-center justify-between px-3 py-2 rounded-xl border text-xs font-bold text-[#64748B] dark:text-[#CBD5E1] bg-white dark:bg-[#1E293B] border-[#D6DEE8] dark:border-[#334155]">
-              <span>Laki-Laki Hadir</span> <span id="count-MALE" class="px-2 py-0.5 rounded-full text-[10px] bg-[#EEF3F8] dark:bg-[#273449]">0</span>
+            <button id="filterBtn-MALE" onclick="SpinEngine.setGenderFilter('MALE')" class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl border text-xs font-bold text-[#64748B] dark:text-[#94A3B8] bg-white dark:bg-darkCard border-[#CBD5E1] dark:border-darkBorder active:scale-95">
+              <span>Laki-Laki Hadir</span> <span id="count-MALE" class="px-2 py-0.5 rounded-full text-[10px] bg-[#F1F5F9] dark:bg-[#090D16]">0</span>
             </button>
-            <button id="filterBtn-FEMALE" onclick="setGenderFilter('FEMALE')" class="w-full flex items-center justify-between px-3 py-2 rounded-xl border text-xs font-bold text-[#64748B] dark:text-[#CBD5E1] bg-white dark:bg-[#1E293B] border-[#D6DEE8] dark:border-[#334155]">
-              <span>Perempuan Hadir</span> <span id="count-FEMALE" class="px-2 py-0.5 rounded-full text-[10px] bg-[#EEF3F8] dark:bg-[#273449]">0</span>
+            <button id="filterBtn-FEMALE" onclick="SpinEngine.setGenderFilter('FEMALE')" class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl border text-xs font-bold text-[#64748B] dark:text-[#94A3B8] bg-white dark:bg-darkCard border-[#CBD5E1] dark:border-darkBorder active:scale-95">
+              <span>Perempuan Hadir</span> <span id="count-FEMALE" class="px-2 py-0.5 rounded-full text-[10px] bg-[#F1F5F9] dark:bg-[#090D16]">0</span>
             </button>
           </div>
         </div>
 
-        <div class="bg-white dark:bg-[#1E293B] border border-[#D6DEE8] dark:border-[#334155] rounded-2xl p-4 shadow-sm">
-          <h2 class="text-xs font-black text-[#64748B] dark:text-[#CBD5E1] mb-3">CONFIG SPIN</h2>
-          <button onclick="toggleInstantMode()" class="w-full flex items-start gap-3 p-3 rounded-xl border border-[#D6DEE8] dark:border-[#334155] text-left bg-white dark:bg-[#1E293B]">
-            <div id="instantCheck" class="w-4 h-4 rounded border flex items-center justify-center text-xs text-brandPrimary font-bold bg-[#EEF3F8] dark:bg-[#111827]"></div>
+        <div class="bg-white dark:bg-darkCard border border-[#CBD5E1] dark:border-darkBorder rounded-2xl p-4 shadow-sm transition-colors">
+          <h2 class="text-xs font-black text-[#64748B] dark:text-[#94A3B8] mb-3">CONFIG SPIN</h2>
+          <button onclick="SpinEngine.toggleInstantMode()" class="w-full flex items-start gap-3 p-3 rounded-xl border border-[#CBD5E1] dark:border-darkBorder text-left bg-white dark:bg-darkCard active:scale-95 transition">
+            <div id="instantCheck" class="w-4 h-4 rounded border flex items-center justify-center text-xs text-brandPrimary font-bold bg-[#F1F5F9] dark:bg-[#090D16] shrink-0 mt-0.5"></div>
             <div>
               <p class="text-xs font-bold dark:text-[#F8FAFC]">Mode Instan (Lewati Putar) ⚡</p>
-              <p class="text-[9px] text-[#64748B] dark:text-[#CBD5E1] mt-0.5">Langsung keluarkan list acak tanpa animasi roda.</p>
+              <p class="text-[9px] text-[#64748B] dark:text-[#94A3B8] mt-0.5">Langsung keluarkan list acak tanpa animasi roda.</p>
             </div>
           </button>
         </div>
 
-        <div class="bg-white dark:bg-[#1E293B] border border-[#D6DEE8] dark:border-[#334155] rounded-2xl p-4 flex flex-col h-[260px] shadow-sm">
+        <div class="bg-white dark:bg-darkCard border border-[#CBD5E1] dark:border-darkBorder rounded-2xl p-4 flex flex-col h-[220px] shadow-sm transition-colors">
           <h3 class="text-xs font-black text-[#64748B] dark:text-[#CBD5E1] uppercase mb-2">PRESENSI AKTIF</h3>
-          <div id="attendancePoolSpin" class="flex-1 overflow-y-auto space-y-1.5 custom-scrollbar"></div>
+          <div id="attendancePoolSpin" class="flex-1 overflow-y-auto space-y-1.5 custom-scrollbar pr-1"></div>
         </div>
-
-        <button onclick="triggerResetConfirm()" class="w-full py-3 bg-white dark:bg-[#1E293B] border rounded-xl text-xs font-bold text-[#64748B] dark:text-[#CBD5E1] flex items-center justify-center gap-2">Reset Sesi Penarikan</button>
       </div>
 
-      <!-- Spinner Wheels Core Visual -->
-      <div class="lg:col-span-9 flex flex-col gap-6">
-        <div class="bg-white dark:bg-[#1E293B] border border-[#D6DEE8] dark:border-[#334155] rounded-2xl p-6 relative flex flex-col items-center justify-center min-h-[280px] overflow-hidden shadow-sm">
-          <div class="absolute top-4 left-6 right-6 flex justify-between text-[10px] font-bold text-[#64748B] dark:text-[#CBD5E1]">
+      <!-- Spinner Wheel Carousel -->
+      <div class="lg:col-span-9 flex flex-col gap-4 sm:gap-5">
+        <div class="bg-white dark:bg-darkCard border border-[#CBD5E1] dark:border-darkBorder rounded-2xl p-4 sm:p-6 relative flex flex-col items-center justify-center min-h-[260px] shadow-sm transition-colors">
+          <div class="w-full flex justify-between items-center text-[10px] font-bold text-[#64748B] dark:text-[#94A3B8] mb-2">
             <span>LOOTBOX NAME OPENER</span>
-            <span>POOL AKTIF: <span id="eligiblePoolCount">0</span></span>
+            <span>POOL AKTIF: <span id="eligiblePoolCount" class="text-brandPrimary font-extrabold">0</span></span>
           </div>
 
-          <div class="w-full my-8 relative">
-            <div id="carouselViewport" class="w-full h-28 relative bg-[#EEF3F8] dark:bg-[#111827] border border-[#D6DEE8] dark:border-[#334155] rounded-xl overflow-hidden flex items-center">
-              <div class="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-0.5 z-30 pointer-events-none bg-brandPrimary"></div>
+          <div class="w-full my-4 sm:my-6 relative">
+            <div id="carouselViewport" class="w-full h-24 sm:h-28 relative bg-[#F1F5F9] dark:bg-[#090D16] border border-[#CBD5E1] dark:border-darkBorder rounded-xl overflow-hidden flex items-center shadow-inner">
+              <div class="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-1 z-30 pointer-events-none bg-brandPrimary shadow-[0_0_12px_rgba(59,130,246,0.9)]"></div>
               <div id="carouselContainer" class="flex items-center absolute left-0 h-full" style="will-change: transform;"></div>
             </div>
           </div>
 
-          <button id="spinBtn" onclick="startSpin()" class="w-full max-w-xs py-4 bg-gradient-to-r from-brandPrimary via-brandSecondary to-brandAccent text-white font-black text-sm rounded-xl uppercase tracking-wider shadow-md">SPIN THE NAME 🎲</button>
+          <button id="spinBtn" onclick="SpinEngine.start()" class="w-full max-w-xs py-3.5 sm:py-4 bg-gradient-to-r from-brandPrimary via-brandSecondary to-brandAccent text-white font-black text-xs sm:text-sm rounded-xl uppercase tracking-wider shadow-md hover:brightness-105 active:scale-95 transition">SPIN THE NAME 🎲</button>
         </div>
 
-        <!-- History Area -->
-        <div class="bg-white dark:bg-[#1E293B] border border-[#D6DEE8] dark:border-[#334155] rounded-2xl p-5 shadow-sm">
-          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-[#E8EDF3] dark:border-[#293548] pb-3 mb-4 gap-2">
+        <!-- Spin Slots Offline -->
+        <div class="bg-white dark:bg-darkCard border border-[#CBD5E1] dark:border-darkBorder rounded-2xl p-4 sm:p-5 shadow-sm transition-colors">
+          <div class="flex justify-between items-center mb-3">
+            <h3 class="text-xs font-black text-[#0F172A] dark:text-[#F8FAFC] uppercase tracking-widest">SLOT SPIN DISIMPAN (OFFLINE)</h3>
+            <button onclick="SlotEngine.triggerSave('spin')" class="px-3 py-1.5 bg-brandPrimary text-white text-[10px] font-black rounded-lg hover:bg-blue-600 transition active:scale-95">+ SIMPAN SESI SPIN</button>
+          </div>
+          <div id="savedSpinContainer" class="space-y-2"></div>
+          <div id="savedSpinEmpty" class="p-4 border border-dashed border-[#CBD5E1] dark:border-darkBorder rounded-xl text-center text-[11px] font-bold text-[#64748B] dark:text-[#94A3B8] uppercase">Belum ada slot spin disimpan.</div>
+        </div>
+
+        <!-- History Log Area -->
+        <div class="bg-white dark:bg-darkCard border border-[#CBD5E1] dark:border-darkBorder rounded-2xl p-4 sm:p-5 shadow-sm transition-colors">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-[#E2E8F0] dark:border-darkBorder pb-3 mb-4 gap-2">
             <div>
-              <h4 class="text-xs font-black uppercase tracking-widest text-[#1E293B] dark:text-[#F8FAFC]">OUTPUT HASIL SPIN INDIVIDU</h4>
-              <p class="text-[9px] text-[#64748B] dark:text-[#CBD5E1] mt-0.5">Anti-Duplikat Giliran Tercatat (<span id="historyCount">0</span>)</p>
+              <h4 class="text-xs font-black uppercase tracking-widest text-[#0F172A] dark:text-[#F8FAFC]">OUTPUT HASIL SPIN INDIVIDU</h4>
+              <p class="text-[9px] text-[#64748B] dark:text-[#94A3B8] mt-0.5">Anti-Duplikat Giliran Tercatat (<span id="historyCount">0</span>)</p>
             </div>
             <div id="historyControls" class="flex items-center gap-1.5 hidden">
-              <button onclick="copySpinHistory()" class="px-2.5 py-1.5 bg-[#EEF3F8] dark:bg-[#273449] border text-[10px] text-brandPrimary dark:text-white font-bold rounded-lg">SALIN</button>
-              <button onclick="shareSpinToWA()" class="px-2.5 py-1.5 bg-[#3FAE6A] text-white text-[10px] font-bold rounded-lg">WHATSAPP</button>
-              <button onclick="clearHistory()" class="px-2.5 py-1.5 bg-[#D9534F]/10 text-statusError text-[10px] font-bold rounded-lg">CLEAR</button>
+              <button onclick="SpinEngine.copyOutput()" class="px-2.5 py-1.5 bg-[#F1F5F9] dark:bg-[#090D16] border border-[#CBD5E1] dark:border-darkBorder text-[10px] text-brandPrimary dark:text-white font-bold rounded-lg hover:bg-[#E2E8F0] active:scale-95 transition">SALIN</button>
+              <button onclick="SpinEngine.shareWA()" class="px-2.5 py-1.5 bg-statusSuccess hover:bg-emerald-600 text-white text-[10px] font-bold rounded-lg active:scale-95 transition">WHATSAPP</button>
+              <button onclick="SpinEngine.clearHistory()" class="px-2.5 py-1.5 bg-statusError/10 hover:bg-statusError/20 text-statusError text-[10px] font-bold rounded-lg active:scale-95 transition">CLEAR</button>
             </div>
           </div>
-          <div id="spinHistoryContainer" class="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-60 overflow-y-auto"></div>
-          <div id="spinHistoryEmpty" class="py-6 text-center border border-dashed rounded-xl text-[10px] font-bold uppercase text-[#64748B]">Belum Ada Hasil Penarikan Tercatat</div>
+          <div id="spinHistoryContainer" class="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-60 overflow-y-auto custom-scrollbar"></div>
+          <div id="spinHistoryEmpty" class="py-6 text-center border border-dashed border-[#CBD5E1] dark:border-darkBorder rounded-xl text-[10px] font-bold uppercase text-[#64748B] dark:text-[#94A3B8]">Belum Ada Hasil Penarikan Tercatat</div>
         </div>
       </div>
     </div>
 
     <!-- TAB 3: AUTOMATIC GROUP BUILDER -->
-    <div id="tabContent-groups" class="tab-view hidden grid grid-cols-1 lg:grid-cols-12 gap-6">
+    <div id="tabContent-groups" class="tab-view hidden grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-5">
       <div class="lg:col-span-4 flex flex-col gap-4">
-        <div class="bg-white dark:bg-[#1E293B] border border-[#D6DEE8] dark:border-[#334155] rounded-2xl p-5 space-y-4 shadow-sm">
-          <h3 class="text-xs font-black text-[#64748B] dark:text-[#CBD5E1] uppercase">CONFIG KELOMPOK</h3>
-          <div>
-            <label class="block text-[10px] font-bold text-[#64748B] uppercase mb-1">Jumlah Kelompok</label>
-            <input type="number" id="groupCountInput" value="4" min="2" class="w-full bg-white dark:bg-[#1E293B] border px-3 py-2 rounded-xl text-sm font-bold focus:outline-none focus:border-brandPrimary text-[#1E293B] dark:text-[#F8FAFC]" />
+        
+        <!-- Priority People Module -->
+        <div class="bg-white dark:bg-darkCard border-2 border-brandAccent/40 dark:border-brandAccent/30 rounded-2xl p-4 sm:p-5 space-y-3 shadow-sm relative overflow-hidden transition-colors">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="text-xs font-black text-brandAccent uppercase tracking-wider flex items-center gap-1.5">
+                <span>⭐</span> PRIORITY PEOPLE
+              </h3>
+              <p class="text-[9px] text-[#64748B] dark:text-[#94A3B8] mt-0.5">Satu orang per kelompok terpisah, seimbang gender.</p>
+            </div>
+            <button onclick="PriorityEngine.addRow()" class="px-2.5 py-1.5 bg-brandAccent hover:bg-amber-600 text-white text-[10px] font-black rounded-lg active:scale-95 transition shrink-0">+ Add Person</button>
           </div>
-          <div>
-            <label class="block text-[10px] font-bold text-[#64748B] uppercase mb-1">Nama Kelompok Kustom (Pisah Koma, Opsional)</label>
-            <textarea id="groupCustomNamesInput" placeholder="Contoh: Tim A, Tim B..." class="w-full bg-white dark:bg-[#1E293B] border px-3 py-2 rounded-xl text-xs h-16 focus:outline-none focus:border-brandPrimary text-[#1E293B] dark:text-[#F8FAFC]"></textarea>
-          </div>
-          <button onclick="generateGroups()" class="w-full py-3 bg-brandPrimary hover:bg-[#255bc2] text-white font-black text-xs uppercase tracking-wider rounded-xl transition">GENERATE KELOMPOK 🎲</button>
+
+          <div id="priorityPeopleContainer" class="space-y-2 max-h-48 overflow-y-auto custom-scrollbar pr-1"></div>
+          <div id="priorityPeopleEmpty" class="p-3 border border-dashed border-[#CBD5E1] dark:border-darkBorder rounded-xl text-center text-[10px] font-bold text-[#64748B] dark:text-[#94A3B8] uppercase">Belum ada siswa prioritas dipilih.</div>
         </div>
 
-        <div class="bg-white dark:bg-[#1E293B] border border-[#D6DEE8] dark:border-[#334155] rounded-2xl p-4 flex flex-col h-[280px] shadow-sm">
-          <h3 class="text-xs font-black text-[#64748B] uppercase mb-2">PRESENSI KELOMPOK</h3>
-          <div id="attendancePoolGroups" class="flex-1 overflow-y-auto space-y-1.5 custom-scrollbar"></div>
+        <div class="bg-white dark:bg-darkCard border border-[#CBD5E1] dark:border-darkBorder rounded-2xl p-4 sm:p-5 space-y-4 shadow-sm transition-colors">
+          <h3 class="text-xs font-black text-[#64748B] dark:text-[#94A3B8] uppercase tracking-wider">CONFIG KELOMPOK</h3>
+          <div>
+            <label class="block text-[10px] font-bold text-[#64748B] dark:text-[#94A3B8] uppercase mb-1">Jumlah Kelompok</label>
+            <input type="number" id="groupCountInput" value="4" min="2" max="20" class="w-full bg-white dark:bg-[#090D16] border border-[#CBD5E1] dark:border-darkBorder px-3 py-2.5 rounded-xl text-sm font-bold focus:outline-none focus:border-brandPrimary text-[#0F172A] dark:text-[#F8FAFC]" />
+          </div>
+          <div>
+            <label class="block text-[10px] font-bold text-[#64748B] dark:text-[#94A3B8] uppercase mb-1">Nama Kelompok Kustom (Pisah Koma, Opsional)</label>
+            <textarea id="groupCustomNamesInput" placeholder="Contoh: Tim Alpha, Tim Beta, Tim Gamma..." class="w-full bg-white dark:bg-[#090D16] border border-[#CBD5E1] dark:border-darkBorder px-3 py-2 rounded-xl text-xs h-16 focus:outline-none focus:border-brandPrimary text-[#0F172A] dark:text-[#F8FAFC] custom-scrollbar"></textarea>
+          </div>
+          <button onclick="GroupEngine.generate()" class="w-full py-3.5 bg-brandPrimary hover:bg-blue-600 text-white font-black text-xs uppercase tracking-wider rounded-xl transition shadow-md active:scale-95">GENERATE KELOMPOK 🎲</button>
+        </div>
+
+        <div class="bg-white dark:bg-darkCard border border-[#CBD5E1] dark:border-darkBorder rounded-2xl p-4 flex flex-col h-[200px] shadow-sm transition-colors">
+          <h3 class="text-xs font-black text-[#64748B] dark:text-[#94A3B8] uppercase mb-2">PRESENSI KELOMPOK</h3>
+          <div id="attendancePoolGroups" class="flex-1 overflow-y-auto space-y-1.5 custom-scrollbar pr-1"></div>
         </div>
       </div>
 
-      <div class="lg:col-span-8 space-y-6">
-        <!-- Local Saved Offline Slots -->
-        <div class="bg-white dark:bg-[#1E293B] border border-[#D6DEE8] dark:border-[#334155] rounded-2xl p-5 shadow-sm">
-          <h3 class="text-xs font-black text-[#1E293B] dark:text-[#F8FAFC] uppercase mb-3 tracking-widest">SLOT KELOMPOK DISIMPAN (OFFLINE)</h3>
-          <div id="savedGroupsContainer" class="space-y-3"></div>
-          <div id="savedGroupsEmpty" class="p-4 border border-dashed rounded-xl text-center text-[11px] font-bold text-[#64748B] uppercase">Belum ada slot kelompok disimpan.</div>
+      <div class="lg:col-span-8 space-y-4 sm:space-y-5">
+        <div class="bg-white dark:bg-darkCard border border-[#CBD5E1] dark:border-darkBorder rounded-2xl p-4 sm:p-5 shadow-sm transition-colors">
+          <h3 class="text-xs font-black text-[#0F172A] dark:text-[#F8FAFC] uppercase mb-3 tracking-widest">SLOT KELOMPOK DISIMPAN (OFFLINE)</h3>
+          <div id="savedGroupsContainer" class="space-y-2"></div>
+          <div id="savedGroupsEmpty" class="p-4 border border-dashed border-[#CBD5E1] dark:border-darkBorder rounded-xl text-center text-[11px] font-bold text-[#64748B] dark:text-[#94A3B8] uppercase">Belum ada slot kelompok disimpan.</div>
         </div>
 
-        <!-- Generated Container Matrix -->
         <div id="groupOutputWrapper" class="space-y-4 hidden animate-popup">
-          <div class="bg-white dark:bg-[#1E293B] border border-[#D6DEE8] dark:border-[#334155] p-4 rounded-xl flex justify-between items-center shadow-sm">
-            <h4 class="text-xs font-black text-[#1E293B] dark:text-[#F8FAFC] uppercase">HASIL PEMBAGIAN KELOMPOK TERBARU</h4>
-            <div class="flex gap-1.5">
-              <button onclick="triggerSaveSlot('groups')" class="px-3 py-1.5 bg-[#D9A441] text-white text-[10px] font-black rounded-lg">SIMPAN SLOT</button>
-              <button onclick="copyGroupOutput()" class="px-3 py-1.5 bg-[#EEF3F8] dark:bg-[#273449] text-brandPrimary dark:text-white text-[10px] font-black rounded-lg">SALIN</button>
+          <div class="bg-white dark:bg-darkCard border border-[#CBD5E1] dark:border-darkBorder p-4 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 shadow-sm transition-colors">
+            <h4 class="text-xs font-black text-[#0F172A] dark:text-[#F8FAFC] uppercase tracking-wider">HASIL PEMBAGIAN KELOMPOK TERBARU</h4>
+            <div class="flex gap-2 w-full sm:w-auto">
+              <button onclick="SlotEngine.triggerSave('groups')" class="flex-1 sm:flex-none px-3.5 py-2 bg-brandAccent hover:bg-amber-600 text-white text-[10px] font-black rounded-xl active:scale-95 transition">SIMPAN SLOT</button>
+              <button onclick="GroupEngine.copyOutput()" class="flex-1 sm:flex-none px-3.5 py-2 bg-[#F1F5F9] dark:bg-[#090D16] border border-[#CBD5E1] dark:border-darkBorder text-brandPrimary dark:text-white text-[10px] font-black rounded-xl hover:bg-[#E2E8F0] active:scale-95 transition">SALIN</button>
+              <button onclick="GroupEngine.shareWA()" class="flex-1 sm:flex-none px-3.5 py-2 bg-statusSuccess hover:bg-emerald-600 text-white text-[10px] font-black rounded-xl active:scale-95 transition">WHATSAPP</button>
             </div>
           </div>
-          <div id="generatedGroupsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+          <div id="generatedGroupsGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4"></div>
         </div>
 
-        <div id="groupsEmptyState" class="py-20 text-center text-[#64748B] border border-dashed border-[#D6DEE8] dark:border-[#334155] rounded-2xl bg-white dark:bg-[#1E293B]">
-          <p class="text-xs font-bold uppercase">Tentukan Parameter & Klik Generate Kelompok</p>
+        <div id="groupsEmptyState" class="py-16 text-center text-[#64748B] dark:text-[#94A3B8] border border-dashed border-[#CBD5E1] dark:border-darkBorder rounded-2xl bg-white dark:bg-darkCard transition-colors">
+          <p class="text-xs font-bold uppercase tracking-wider">Tentukan Parameter & Klik Generate Kelompok</p>
         </div>
       </div>
     </div>
 
     <!-- TAB 4: PARTNER ACAK DUO MATCHING -->
-    <div id="tabContent-partners" class="tab-view hidden grid grid-cols-1 lg:grid-cols-12 gap-6">
+    <div id="tabContent-partners" class="tab-view hidden grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-5">
       <div class="lg:col-span-4 flex flex-col gap-4">
-        <div class="bg-white dark:bg-[#1E293B] border border-[#D6DEE8] dark:border-[#334155] rounded-2xl p-5 space-y-4 shadow-sm h-fit">
-          <h3 class="text-xs font-black text-[#64748B] uppercase">CONFIG PARTNER</h3>
+        <div class="bg-white dark:bg-darkCard border border-[#CBD5E1] dark:border-darkBorder rounded-2xl p-4 sm:p-5 space-y-4 shadow-sm h-fit transition-colors">
+          <h3 class="text-xs font-black text-[#64748B] dark:text-[#94A3B8] uppercase tracking-wider">CONFIG PARTNER</h3>
           <div>
-            <label class="block text-[10px] font-bold text-[#64748B] uppercase mb-1">Jumlah Sesi Perputaran</label>
-            <input type="number" id="partnerSessionInput" value="1" min="1" max="5" class="w-full bg-white dark:bg-[#1E293B] border px-3 py-2 rounded-xl text-sm font-bold focus:outline-none focus:border-brandPrimary text-[#1E293B] dark:text-[#F8FAFC]" />
+            <label class="block text-[10px] font-bold text-[#64748B] dark:text-[#94A3B8] uppercase mb-1">Jumlah Sesi Perputaran</label>
+            <input type="number" id="partnerSessionInput" value="1" min="1" max="5" class="w-full bg-white dark:bg-[#090D16] border border-[#CBD5E1] dark:border-darkBorder px-3 py-2.5 rounded-xl text-sm font-bold focus:outline-none focus:border-brandPrimary text-[#0F172A] dark:text-[#F8FAFC]" />
           </div>
-          <button onclick="generatePartners()" class="w-full py-3 bg-[#D9A441] hover:bg-[#c59335] text-white font-black text-xs uppercase tracking-wider rounded-xl transition">ACAK PASANGAN SEKARANG ⚡</button>
+          <button onclick="PartnerEngine.generate()" class="w-full py-3.5 bg-brandAccent hover:bg-amber-600 text-white font-black text-xs uppercase tracking-wider rounded-xl transition shadow-md active:scale-95">ACAK PASANGAN SEKARANG ⚡</button>
         </div>
 
-        <div class="bg-white dark:bg-[#1E293B] border border-[#D6DEE8] dark:border-[#334155] rounded-2xl p-4 flex flex-col h-[280px] shadow-sm">
-          <h3 class="text-xs font-black text-[#64748B] uppercase mb-2">PRESENSI PARTNER</h3>
-          <div id="attendancePoolPartners" class="flex-1 overflow-y-auto space-y-1.5 custom-scrollbar"></div>
+        <div class="bg-white dark:bg-darkCard border border-[#CBD5E1] dark:border-darkBorder rounded-2xl p-4 flex flex-col h-[240px] shadow-sm transition-colors">
+          <h3 class="text-xs font-black text-[#64748B] dark:text-[#94A3B8] uppercase mb-2">PRESENSI PARTNER</h3>
+          <div id="attendancePoolPartners" class="flex-1 overflow-y-auto space-y-1.5 custom-scrollbar pr-1"></div>
         </div>
       </div>
 
-      <div class="lg:col-span-8 space-y-6">
-        <div class="bg-white dark:bg-[#1E293B] border border-[#D6DEE8] dark:border-[#334155] rounded-2xl p-5 shadow-sm">
-          <h3 class="text-xs font-black text-[#1E293B] dark:text-[#F8FAFC] uppercase mb-3 tracking-widest">SLOT PARTNER DISIMPAN (OFFLINE)</h3>
-          <div id="savedPartnersContainer" class="space-y-4"></div>
-          <div id="savedPartnersEmpty" class="p-4 border border-dashed rounded-xl text-center text-[11px] font-bold text-[#64748B] uppercase">Belum ada slot partner disimpan.</div>
+      <div class="lg:col-span-8 space-y-4 sm:space-y-5">
+        <div class="bg-white dark:bg-darkCard border border-[#CBD5E1] dark:border-darkBorder rounded-2xl p-4 sm:p-5 shadow-sm transition-colors">
+          <h3 class="text-xs font-black text-[#0F172A] dark:text-[#F8FAFC] uppercase mb-3 tracking-widest">SLOT PARTNER DISIMPAN (OFFLINE)</h3>
+          <div id="savedPartnersContainer" class="space-y-2"></div>
+          <div id="savedPartnersEmpty" class="p-4 border border-dashed border-[#CBD5E1] dark:border-darkBorder rounded-xl text-center text-[11px] font-bold text-[#64748B] dark:text-[#94A3B8] uppercase">Belum ada slot partner disimpan.</div>
         </div>
 
         <div id="partnerOutputWrapper" class="space-y-4 hidden animate-popup">
-          <div class="bg-white dark:bg-[#1E293B] border border-[#D6DEE8] dark:border-[#334155] p-4 rounded-xl flex justify-between items-center shadow-sm">
-            <h4 class="text-xs font-black text-[#1E293B] dark:text-[#F8FAFC] uppercase">HASIL PARTNER MATCHING DUO TERBARU</h4>
-            <div class="flex gap-1.5">
-              <button onclick="triggerSaveSlot('partners')" class="px-3 py-1.5 bg-[#D9A441] text-white text-[10px] font-black rounded-lg">SIMPAN SLOT</button>
-              <button onclick="copyPartnerOutput()" class="px-3 py-1.5 bg-[#EEF3F8] dark:bg-[#273449] text-brandPrimary dark:text-white text-[10px] font-black rounded-lg">SALIN</button>
+          <div class="bg-white dark:bg-darkCard border border-[#CBD5E1] dark:border-darkBorder p-4 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 shadow-sm transition-colors">
+            <h4 class="text-xs font-black text-[#0F172A] dark:text-[#F8FAFC] uppercase tracking-wider">HASIL PARTNER MATCHING DUO TERBARU</h4>
+            <div class="flex gap-2 w-full sm:w-auto">
+              <button onclick="SlotEngine.triggerSave('partners')" class="flex-1 sm:flex-none px-3.5 py-2 bg-brandAccent hover:bg-amber-600 text-white text-[10px] font-black rounded-xl active:scale-95 transition">SIMPAN SLOT</button>
+              <button onclick="PartnerEngine.copyOutput()" class="flex-1 sm:flex-none px-3.5 py-2 bg-[#F1F5F9] dark:bg-[#090D16] border border-[#CBD5E1] dark:border-darkBorder text-brandPrimary dark:text-white text-[10px] font-black rounded-xl hover:bg-[#E2E8F0] active:scale-95 transition">SALIN</button>
+              <button onclick="PartnerEngine.shareWA()" class="flex-1 sm:flex-none px-3.5 py-2 bg-statusSuccess hover:bg-emerald-600 text-white text-[10px] font-black rounded-xl active:scale-95 transition">WHATSAPP</button>
             </div>
           </div>
           <div id="generatedPartnersSesiList" class="space-y-4"></div>
         </div>
 
-        <div id="partnersEmptyState" class="py-20 text-center text-[#64748B] border border-dashed border-[#D6DEE8] dark:border-[#334155] rounded-2xl bg-white dark:bg-[#1E293B]">
-          <p class="text-xs font-bold uppercase">Tentukan Jumlah Sesi & Klik Acak Pasangan Sekarang</p>
+        <div id="partnersEmptyState" class="py-16 text-center text-[#64748B] dark:text-[#94A3B8] border border-dashed border-[#CBD5E1] dark:border-darkBorder rounded-2xl bg-white dark:bg-darkCard transition-colors">
+          <p class="text-xs font-bold uppercase tracking-wider">Tentukan Jumlah Sesi & Klik Acak Pasangan Sekarang</p>
         </div>
       </div>
     </div>
   </main>
 
-  <!-- MODAL SYSTEM OVERLAYS -->
-  <!-- 1. Detail Student -->
-  <div id="studentDetailModal" class="fixed inset-0 z-50 items-center justify-center p-4 bg-black/50 backdrop-blur-sm hidden">
-    <div class="bg-white dark:bg-[#1E293B] rounded-2xl p-6 max-w-sm w-full shadow-2xl relative animate-popup">
-      <button onclick="closeDetailModal()" class="absolute top-4 right-4 text-[#64748B] font-bold text-lg">&times;</button>
-      <div class="flex flex-col items-center text-center space-y-4">
-        <div>
-          <h3 id="detailStudentTitle" class="text-base font-extrabold text-[#1E293B] dark:text-[#F8FAFC] uppercase"></h3>
-          <p class="text-[10px] font-black text-[#64748B] uppercase tracking-widest mt-1">XI TKJ DIVISION</p>
+  <!-- MODAL DIALOG OVERLAYS -->
+  <!-- 1. Detail Student Modal -->
+  <div id="studentDetailModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm hidden">
+    <div class="bg-white dark:bg-darkCard border border-[#CBD5E1] dark:border-darkBorder rounded-2xl p-5 sm:p-6 max-w-sm w-full shadow-2xl relative animate-popup transition-colors">
+      <button onclick="ModalManager.close('studentDetailModal')" class="absolute top-4 right-4 text-[#64748B] hover:text-[#0F172A] dark:hover:text-white font-bold text-xl p-1">&times;</button>
+      <div class="flex flex-col items-center text-center space-y-3.5">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-tr from-brandPrimary to-brandSecondary flex items-center justify-center text-white font-black text-xl shadow-md">
+          <span id="detailStudentBadge">0</span>
         </div>
-        <div class="w-full space-y-2.5 border-t pt-4 text-xs dark:text-[#CBD5E1]">
-          <div class="flex justify-between"><span>Gender:</span><span id="detailStudentGender" class="font-bold"></span></div>
-          <div class="flex justify-between"><span>Status Absen:</span><span id="detailStudentStatusBadge" class="font-black px-1.5 py-0.5 rounded text-[10px]"></span></div>
+        <div>
+          <h3 id="detailStudentTitle" class="text-base font-extrabold text-[#0F172A] dark:text-[#F8FAFC] uppercase"></h3>
+          <p class="text-[10px] font-black text-[#64748B] dark:text-[#94A3B8] uppercase tracking-widest mt-1">XI TKJ • SMKN 11 BANDUNG</p>
+        </div>
+        <div class="w-full space-y-2.5 border-t border-[#E2E8F0] dark:border-darkBorder pt-3.5 text-xs dark:text-[#CBD5E1]">
+          <div class="flex justify-between"><span>Jenis Kelamin:</span><span id="detailStudentGender" class="font-bold"></span></div>
+          <div class="flex justify-between"><span>Status Absen:</span><span id="detailStudentStatusBadge" class="font-black px-2 py-0.5 rounded text-[10px]"></span></div>
           <div class="flex justify-between"><span>Struktur / Jabatan:</span><span id="detailStudentRole" class="font-extrabold text-brandPrimary"></span></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- 2. Winner Modal Announcement -->
-  <div id="winnerModal" class="fixed inset-0 z-50 items-center justify-center p-4 bg-black/50 backdrop-blur-sm hidden">
-    <div class="bg-white dark:bg-[#1E293B] border-2 border-brandPrimary rounded-3xl p-6 max-w-xl w-full text-center shadow-2xl animate-popup">
-      <p class="text-[10px] font-black tracking-widest text-[#D9A441] uppercase mb-1">🎉 TERPILIH 🎉</p>
-      <div class="p-5 rounded-2xl border bg-[#EEF3F8]/50 dark:bg-[#111827]/50 mb-6 border-[#D6DEE8] dark:border-[#334155]">
-        <h2 id="winnerStudentName" class="text-xl sm:text-2xl font-black uppercase text-[#1E293B] dark:text-[#F8FAFC]"></h2>
+  <!-- 2. Winner Modal -->
+  <div id="winnerModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm hidden">
+    <div class="bg-white dark:bg-darkCard border-2 border-brandPrimary rounded-3xl p-5 sm:p-8 max-w-lg w-full text-center shadow-2xl animate-popup transition-colors">
+      <p class="text-[11px] font-black tracking-widest text-brandAccent uppercase mb-2">🎉 SISWA TERPILIH 🎉</p>
+      <div class="p-5 sm:p-6 rounded-2xl border bg-[#F1F5F9]/50 dark:bg-[#090D16]/50 mb-5 border-[#CBD5E1] dark:border-darkBorder">
+        <h2 id="winnerStudentName" class="text-lg sm:text-2xl font-black uppercase text-[#0F172A] dark:text-[#F8FAFC]"></h2>
       </div>
-      <div class="flex gap-2">
-        <button onclick="closeWinnerModal()" class="flex-1 py-2.5 bg-[#EEF3F8] dark:bg-[#273449] text-xs font-bold rounded-xl border dark:text-white">TUTUP</button>
-        <button onclick="closeWinnerModal(); setTimeout(startSpin, 150);" class="flex-1 py-2.5 bg-brandPrimary text-white text-xs font-black rounded-xl">ACAK LAGI 🎲</button>
+      <div class="flex gap-2.5">
+        <button onclick="ModalManager.close('winnerModal')" class="flex-1 py-3 bg-[#F1F5F9] dark:bg-[#090D16] text-xs font-bold rounded-xl border border-[#CBD5E1] dark:border-darkBorder dark:text-white hover:bg-[#E2E8F0] active:scale-95 transition">TUTUP</button>
+        <button onclick="ModalManager.close('winnerModal'); setTimeout(SpinEngine.start, 150);" class="flex-1 py-3 bg-brandPrimary text-white text-xs font-black rounded-xl hover:bg-blue-600 active:scale-95 transition shadow-md">ACAK LAGI 🎲</button>
       </div>
     </div>
   </div>
 
-  <!-- 3. Save Slot Dialog -->
-  <div id="saveSlotModal" class="fixed inset-0 z-50 items-center justify-center p-4 bg-black/40 backdrop-blur-sm hidden">
-    <div class="bg-white dark:bg-[#1E293B] rounded-2xl p-6 max-w-sm w-full shadow-2xl animate-popup">
-      <h3 class="text-sm font-black mb-2 uppercase text-[#1E293B] dark:text-[#F8FAFC]">SIMPAN SLOT OFFLINE</h3>
-      <input type="text" id="newSlotNameInput" class="w-full px-3 py-2 border rounded-xl text-sm font-bold mb-4 focus:outline-none bg-white dark:bg-[#1E293B] text-[#1E293B] dark:text-[#F8FAFC]" />
+  <!-- 3. Save Slot Modal -->
+  <div id="saveSlotModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm hidden">
+    <div class="bg-white dark:bg-darkCard border border-[#CBD5E1] dark:border-darkBorder rounded-2xl p-5 sm:p-6 max-w-sm w-full shadow-2xl animate-popup transition-colors">
+      <h3 class="text-sm font-black mb-1 uppercase text-[#0F172A] dark:text-[#F8FAFC]">SIMPAN SLOT OFFLINE</h3>
+      <p class="text-[10px] text-[#64748B] dark:text-[#94A3B8] mb-4">Masukkan judul slot untuk disimpan di LocalStorage browser.</p>
+      <input type="text" id="newSlotNameInput" class="w-full px-3 py-2.5 border border-[#CBD5E1] dark:border-darkBorder rounded-xl text-xs font-bold mb-4 focus:outline-none focus:border-brandPrimary bg-white dark:bg-[#090D16] text-[#0F172A] dark:text-[#F8FAFC]" />
       <div class="flex gap-2 justify-end">
-        <button onclick="closeSaveSlotModal()" class="px-4 py-2 bg-[#EEF3F8] dark:bg-[#273449] rounded-lg text-xs font-bold dark:text-white">BATAL</button>
-        <button onclick="confirmSaveSlot()" class="px-4 py-2 bg-brandPrimary text-white rounded-lg text-xs font-bold">SIMPAN</button>
+        <button onclick="ModalManager.close('saveSlotModal')" class="px-4 py-2 bg-[#F1F5F9] dark:bg-[#090D16] rounded-xl text-xs font-bold dark:text-white border border-[#CBD5E1] dark:border-darkBorder">BATAL</button>
+        <button onclick="SlotEngine.confirmSave()" class="px-4 py-2 bg-brandPrimary text-white rounded-xl text-xs font-bold hover:bg-blue-600">SIMPAN</button>
       </div>
     </div>
   </div>
 
-  <!-- 4. Reset Session Log Confirmation -->
-  <div id="resetConfirmModal" class="fixed inset-0 z-50 items-center justify-center p-4 bg-black/40 backdrop-blur-sm hidden">
-    <div class="bg-white dark:bg-[#1E293B] rounded-2xl p-6 max-w-sm w-full shadow-2xl animate-popup">
-      <h3 class="text-sm font-black mb-4 uppercase text-[#1E293B] dark:text-[#F8FAFC]">RESET LOG SPIN?</h3>
+  <!-- 4. Rename Slot Modal -->
+  <div id="renameSlotModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm hidden">
+    <div class="bg-white dark:bg-darkCard border border-[#CBD5E1] dark:border-darkBorder rounded-2xl p-5 sm:p-6 max-w-sm w-full shadow-2xl animate-popup transition-colors">
+      <h3 class="text-sm font-black mb-1 uppercase text-[#0F172A] dark:text-[#F8FAFC]">UBAH NAMA SLOT</h3>
+      <input type="text" id="renameSlotInput" class="w-full px-3 py-2.5 border border-[#CBD5E1] dark:border-darkBorder rounded-xl text-xs font-bold my-3 focus:outline-none focus:border-brandPrimary bg-white dark:bg-[#090D16] text-[#0F172A] dark:text-[#F8FAFC]" />
       <div class="flex gap-2 justify-end">
-        <button onclick="closeResetConfirmModal()" class="px-4 py-2 bg-[#EEF3F8] dark:bg-[#273449] rounded-lg text-xs font-bold dark:text-white">BATAL</button>
-        <button onclick="confirmResetSession()" class="px-4 py-2 bg-statusError text-white rounded-lg text-xs font-bold">RESET</button>
+        <button onclick="ModalManager.close('renameSlotModal')" class="px-4 py-2 bg-[#F1F5F9] dark:bg-[#090D16] rounded-xl text-xs font-bold dark:text-white border border-[#CBD5E1] dark:border-darkBorder">BATAL</button>
+        <button onclick="SlotEngine.confirmRename()" class="px-4 py-2 bg-brandPrimary text-white rounded-xl text-xs font-bold hover:bg-blue-600">SIMPAN NAMA</button>
       </div>
     </div>
   </div>
 
-  <!-- 5. Pool Exhausted Modal -->
-  <div id="exhaustedAlertModal" class="fixed inset-0 z-50 items-center justify-center p-4 bg-black/40 backdrop-blur-sm hidden">
-    <div class="bg-white dark:bg-[#1E293B] rounded-2xl p-6 max-w-sm w-full text-center animate-popup">
-      <h3 class="text-sm font-black mb-4 uppercase text-[#1E293B] dark:text-[#F8FAFC]">POOL SISWA HABIS</h3>
-      <p class="text-xs text-[#64748B] dark:text-[#CBD5E1] mb-4">Semua siswa yang hadir dalam filter telah terpilih satu kali.</p>
-      <button onclick="closeExhaustedModalAndReset()" class="w-full py-2 bg-brandPrimary text-white font-black text-xs rounded-xl">BERSIHKAN LOG & MULANG</button>
+  <!-- 5. Reset Confirm Modal -->
+  <div id="resetConfirmModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm hidden">
+    <div class="bg-white dark:bg-darkCard border border-[#CBD5E1] dark:border-darkBorder rounded-2xl p-5 sm:p-6 max-w-sm w-full shadow-2xl animate-popup transition-colors">
+      <h3 class="text-sm font-black mb-2 uppercase text-[#0F172A] dark:text-[#F8FAFC]">RESET LOG SPIN?</h3>
+      <p class="text-xs text-[#64748B] dark:text-[#94A3B8] mb-5">Seluruh daftar siswa terpilih pada sesi spin saat ini akan dibersihkan.</p>
+      <div class="flex gap-2 justify-end">
+        <button onclick="ModalManager.close('resetConfirmModal')" class="px-4 py-2 bg-[#F1F5F9] dark:bg-[#090D16] rounded-xl text-xs font-bold dark:text-white border border-[#CBD5E1] dark:border-darkBorder">BATAL</button>
+        <button onclick="SpinEngine.confirmReset()" class="px-4 py-2 bg-statusError text-white rounded-xl text-xs font-bold hover:bg-red-600">RESET LOG</button>
+      </div>
     </div>
   </div>
 
-  <!-- Global Instant Notification Toast -->
-  <div id="toastAlert" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-white dark:bg-[#1E293B] text-[#1E293B] dark:text-[#F8FAFC] border border-[#D6DEE8] dark:border-[#334155] px-6 py-3 rounded-xl text-xs font-bold shadow-2xl z-50 flex items-center gap-2 animate-popup hidden">
+  <!-- 6. Exhausted Alert Modal -->
+  <div id="exhaustedAlertModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm hidden">
+    <div class="bg-white dark:bg-darkCard border border-[#CBD5E1] dark:border-darkBorder rounded-2xl p-5 sm:p-6 max-w-sm w-full text-center animate-popup shadow-2xl transition-colors">
+      <div class="text-3xl mb-2">🎯</div>
+      <h3 class="text-sm font-black mb-2 uppercase text-[#0F172A] dark:text-[#F8FAFC]">POOL SISWA HABIS</h3>
+      <p class="text-xs text-[#64748B] dark:text-[#94A3B8] mb-5">Semua siswa yang hadir dalam filter telah terpilih satu kali.</p>
+      <button onclick="SpinEngine.confirmResetExhausted()" class="w-full py-3 bg-brandPrimary text-white font-black text-xs rounded-xl shadow-md hover:bg-blue-600 active:scale-95 transition">BERSIHKAN LOG & Ulangi</button>
+    </div>
+  </div>
+
+  <!-- Global Toast Notifications -->
+  <div id="toastAlert" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-white dark:bg-darkCard text-[#0F172A] dark:text-[#F8FAFC] border border-[#CBD5E1] dark:border-darkBorder px-5 py-3 rounded-xl text-xs font-bold shadow-2xl z-50 flex items-center gap-2 animate-popup hidden transition-colors">
     <span id="toastMessage"></span>
   </div>
 
   <div id="instantToastAlert" class="fixed inset-0 z-50 flex items-center justify-center pointer-events-none px-4 hidden">
-    <div class="bg-white dark:bg-[#1E293B] border border-brandPrimary rounded-2xl px-6 py-4 text-center shadow-2xl animate-popup">
-      <h3 class="text-sm font-black text-[#1E293B] dark:text-[#F8FAFC] uppercase">SISWA DIACAK INSTAN ⚡</h3>
+    <div class="bg-white dark:bg-darkCard border-2 border-brandPrimary rounded-2xl px-6 py-4 text-center shadow-2xl animate-popup">
+      <h3 class="text-sm font-black text-[#0F172A] dark:text-[#F8FAFC] uppercase">SISWA DIACAK INSTAN ⚡</h3>
     </div>
   </div>
 
-  <footer class="relative z-10 py-5 border-t border-[#D6DEE8] dark:border-[#334155] bg-white/50 dark:bg-[#1E293B]/50 text-center text-[9px] text-[#64748B] dark:text-[#CBD5E1] uppercase tracking-widest font-black transition-colors duration-300">
-    SCHOTOOLS PREMIUM SUITE • GITHUB PAGES ENGINE STABLE
+  <footer class="relative z-10 py-4 border-t border-[#CBD5E1] dark:border-darkBorder bg-white/50 dark:bg-darkCard/50 text-center text-[9px] text-[#64748B] dark:text-[#94A3B8] uppercase tracking-widest font-black transition-colors duration-300">
+    SCHOTOOLS PREMIUM SUITE • XI TKJ SMKN 11 BANDUNG • GITHUB PAGES READY
   </footer>
 
-  <!-- CORE LOGIC CORE ENGINE JAVASCRIPT BINDINGS -->
   <script>
-    const GENDER_MALE = 'L';
-    const GENDER_FEMALE = 'P';
+    /* ---------------------------------------------------------
+       1. ROSTER CONFIG & DATABASE MODULE
+       --------------------------------------------------------- */
+    const RosterConfig = {
+      GENDER_MALE: 'L',
+      GENDER_FEMALE: 'P',
+      CLASS_ROSTER: [
+        { id: 1, name: 'AIRA FIRANA', gender: 'P', role: 'Seksi Peralatan' },
+        { id: 2, name: 'ALIF NUR FAJRI', gender: 'L', role: 'Seksi Keagamaan' },
+        { id: 3, name: 'ALYA AULIA PUTRI', gender: 'P', role: 'Seksi Bidang Projek' },
+        { id: 4, name: 'ARGEN SETRA ALDIANSYAH', gender: 'L', role: 'Seksi Keagamaan' },
+        { id: 5, name: 'BAYU ABIYASA', gender: 'L', role: 'Seksi Kebersihan' },
+        { id: 6, name: 'BUNGA PUTRI HANANTA', gender: 'P', role: 'Seksi Peralatan' },
+        { id: 7, name: 'DAVA AL HABSY', gender: 'L', role: 'Seksi Peralatan' },
+        { id: 8, name: 'DELANO KIRANA NUGRAHA', gender: 'L', role: 'Seksi Peralatan' },
+        { id: 9, name: 'DICKY FRIANTO', gender: 'L', role: 'Seksi Sosial' },
+        { id: 10, name: 'FAISHAL ADZANI SOPHIAN', gender: 'L', role: 'Seksi Peralatan' },
+        { id: 11, name: 'FAIZ PRATAMA IBRAHIMOVY', gender: 'L', role: 'Ketua Kelas' },
+        { id: 12, name: 'GALIH SEPTIAN', gender: 'L', role: 'Seksi Kebersihan' },
+        { id: 13, name: 'HAFNA ILMY MUHALLA', gender: 'P', role: 'Sekretaris 1' },
+        { id: 14, name: 'ILHAM TAUFIK GUNAWAN', gender: 'L', role: 'Seksi Keamanan' },
+        { id: 15, name: 'JEANNY WYNNIE PRATAMA', gender: 'P', role: 'Bendahara 1' },
+        { id: 16, name: 'M ALIF NAWAWI', gender: 'L', role: 'Seksi Keagamaan' },
+        { id: 17, name: 'MARVEL PUTRA PERMANA', gender: 'L', role: 'Seksi Sosial' },
+        { id: 18, name: 'MEISYA AULIA HAIRUNISA', gender: 'P', role: 'Bendahara 2' },
+        { id: 19, name: 'MOCHAMAD ABIE SETIAWAN', gender: 'L', role: 'Seksi Keagamaan' },
+        { id: 20, name: 'MOHAMMAD RISKY RAMADHAN', gender: 'L', role: 'Seksi Bidang Projek' },
+        { id: 21, name: 'MUHAMAD SAEPUL PRATAMA', gender: 'L', role: 'Seksi Kebersihan' },
+        { id: 22, name: 'MUHAMMAD ABDUSSALAM ALAMSYAH', gender: 'L', role: 'Seksi Bidang Projek' },
+        { id: 23, name: 'MUHAMMAD AJI SETIAWAN ARIPIN', gender: 'L', role: 'Seksi Keamanan' },
+        { id: 24, name: 'MUHAMMAD ALFINO', gender: 'L', role: 'Seksi Peralatan' },
+        { id: 25, name: 'MUHAMMAD FAHRI ISMAIL', gender: 'L', role: 'Seksi Bidang Projek' },
+        { id: 26, name: 'MUHAMMAD FAISAL IKHSAN', gender: 'L', role: 'Seksi Keamanan' },
+        { id: 27, name: 'MUHAMMAD NUR ALAMSYAH ASH SHIDDIQ', gender: 'L', role: 'Seksi Keamanan' },
+        { id: 28, name: 'MUHAMMAD REVAN PRATAMA', gender: 'L', role: 'Seksi Keagamaan' },
+        { id: 29, name: 'NITA APRILIA', gender: 'P', role: 'Sekretaris 2' },
+        { id: 30, name: 'NOVA YUDA PRATAMA', gender: 'L', role: 'Seksi Sosial' },
+        { id: 31, name: 'RADITYA PRADIPTA', gender: 'L', role: 'Seksi Keagamaan' },
+        { id: 32, name: 'RAFFA MAHESA', gender: 'L', role: 'Seksi Kebersihan' },
+        { id: 33, name: 'RAIHAN TRI PUTRA', gender: 'L', role: 'Seksi Kebersihan' },
+        { id: 34, name: 'REVAN RAHADIAN PUTRA', gender: 'L', role: 'Seksi Keamanan' },
+        { id: 35, name: 'SATRYA DHIKA PRATAMA', gender: 'L', role: 'Wakil Ketua Kelas' },
+        { id: 36, name: 'SHERLY NOER HSP', gender: 'P', role: 'Seksi Sosial' },
+        { id: 37, name: 'SHIDDIQ IBRAHIM RAHMATULLOH', gender: 'L', role: 'Seksi Bidang Projek' },
+        { id: 38, name: 'TALITA NUR FADILAH', gender: 'P', role: 'Seksi Sosial' },
+        { id: 39, name: 'VINA NOVITA ANGRAENI', gender: 'P', role: 'Seksi Bidang Projek' },
+        { id: 40, name: 'WILDAN NURROHMAN', gender: 'L', role: 'Seksi Keamanan' }
+      ]
+    };
 
-    const CLASS_ROSTER = [
-      { id: 1, name: 'AIRA FIRANA', gender: GENDER_FEMALE, role: 'Seksi Peralatan' },
-      { id: 2, name: 'ALIF NUR FAJRI', gender: GENDER_MALE, role: 'Seksi Keagamaan' },
-      { id: 3, name: 'ALYA AULIA PUTRI', gender: GENDER_FEMALE, role: 'Seksi Bidang Projek' },
-      { id: 4, name: 'ARGEN SETRA ALDIANSYAH', gender: GENDER_MALE, role: 'Seksi Keagamaan' },
-      { id: 5, name: 'BAYU ABIYASA', gender: GENDER_MALE, role: 'Seksi Kebersihan' },
-      { id: 6, name: 'BUNGA PUTRI HANANTA', gender: GENDER_FEMALE, role: 'Seksi Peralatan' },
-      { id: 7, name: 'DAVA AL HABSY', gender: GENDER_MALE, role: 'Seksi Peralatan' },
-      { id: 8, name: 'DELANO KIRANA NUGRAHA', gender: GENDER_MALE, role: 'Seksi Peralatan' },
-      { id: 9, name: 'DICKY FRIANTO', gender: GENDER_MALE, role: 'Seksi Sosial' },
-      { id: 10, name: 'FAISHAL ADZANI SOPHIAN', gender: GENDER_MALE, role: 'Seksi Peralatan' },
-      { id: 11, name: 'FAIZ PRATAMA IBRAHIMOVY', gender: GENDER_MALE, role: 'Ketua Kelas' },
-      { id: 12, name: 'GALIH SEPTIAN', gender: GENDER_MALE, role: 'Seksi Kebersihan' },
-      { id: 13, name: 'HAFNA ILMY MUHALLA', gender: GENDER_FEMALE, role: 'Sekretaris 1' },
-      { id: 14, name: 'ILHAM TAUFIK GUNAWAN', gender: GENDER_MALE, role: 'Seksi Keamanan' },
-      { id: 15, name: 'JEANNY WYNNIE PRATAMA', gender: GENDER_FEMALE, role: 'Bendahara 1' },
-      { id: 16, name: 'M ALIF NAWAWI', gender: GENDER_MALE, role: 'Seksi Keagamaan' },
-      { id: 17, name: 'MARVEL PUTRA PERMANA', gender: GENDER_MALE, role: 'Seksi Sosial' },
-      { id: 18, name: 'MEISYA AULIA HAIRUNISA', gender: GENDER_FEMALE, role: 'Bendahara 2' },
-      { id: 19, name: 'MOCHAMAD ABIE SETIAWAN', gender: GENDER_MALE, role: 'Seksi Keagamaan' },
-      { id: 20, name: 'MOHAMMAD RISKY RAMADHAN', gender: GENDER_MALE, role: 'Seksi Bidang Projek' },
-      { id: 21, name: 'MUHAMAD SAEPUL PRATAMA', gender: GENDER_MALE, role: 'Seksi Kebersihan' },
-      { id: 22, name: 'MUHAMMAD ABDUSSALAM ALAMSYAH', gender: GENDER_MALE, role: 'Seksi Bidang Projek' },
-      { id: 23, name: 'MUHAMMAD AJI SETIAWAN ARIPIN', gender: GENDER_MALE, role: 'Seksi Keamanan' },
-      { id: 24, name: 'MUHAMMAD ALFINO', gender: GENDER_MALE, role: 'Seksi Peralatan' },
-      { id: 25, name: 'MUHAMMAD FAHRI ISMAIL', gender: GENDER_MALE, role: 'Seksi Bidang Projek' },
-      { id: 26, name: 'MUHAMMAD FAISAL IKHSAN', gender: GENDER_MALE, role: 'Seksi Keamanan' },
-      { id: 27, name: 'MUHAMMAD NUR ALAMSYAH ASH SHIDDIQ', gender: GENDER_MALE, role: 'Seksi Keamanan' },
-      { id: 28, name: 'MUHAMMAD REVAN PRATAMA', gender: GENDER_MALE, role: 'Seksi Keagamaan' },
-      { id: 29, name: 'NITA APRILIA', gender: GENDER_FEMALE, role: 'Sekretaris 2' },
-      { id: 30, name: 'NOVA YUDA PRATAMA', gender: GENDER_MALE, role: 'Seksi Sosial' },
-      { id: 31, name: 'RADITYA PRADIPTA', gender: GENDER_MALE, role: 'Seksi Keagamaan' },
-      { id: 32, name: 'RAFFA MAHESA', gender: GENDER_MALE, role: 'Seksi Kebersihan' },
-      { id: 33, name: 'RAIHAN TRI PUTRA', gender: GENDER_MALE, role: 'Seksi Kebersihan' },
-      { id: 34, name: 'REVAN RAHADIAN PUTRA', gender: GENDER_MALE, role: 'Seksi Keamanan' },
-      { id: 35, name: 'SATRYA DHIKA PRATAMA', gender: GENDER_MALE, role: 'Wakil Ketua Kelas' },
-      { id: 36, name: 'SHERLY NOER HSP', gender: GENDER_FEMALE, role: 'Seksi Sosial' },
-      { id: 37, name: 'SHIDDIQ IBRAHIM RAHMATULLOH', gender: GENDER_MALE, role: 'Seksi Bidang Projek' },
-      { id: 38, name: 'TALITA NUR FADILAH', gender: GENDER_FEMALE, role: 'Seksi Sosial' },
-      { id: 39, name: 'VINA NOVITA ANGRAENI', gender: GENDER_FEMALE, role: 'Seksi Bidang Projek' },
-      { id: 40, name: 'WILDAN NURROHMAN', gender: GENDER_MALE, role: 'Seksi Keamanan' }
-    ];
-
-    let students = [];
-    let currentTab = 'absen';
-    let searchQuery = '';
-    let currentTheme = 'light';
-    let activeGenderFilter = 'ALL';
-    let isInstantMode = false;
-    let spinHistory = [];
-    let winner = null;
-    let spinning = false;
-
-    let generatedGroups = null;
-    let generatedPartners = [];
-    let savedGroups = [];
-    let savedPartners = [];
-    let savingSlotType = '';
-
-    let isMuted = false;
-    let soundVolume = 0.4;
-    let particleSpeedScale = { current: 1.0 };
-    let cardWidth = 260;
-    const cardGap = 12;
-
-    const audioCtxEngine = {
-      ctx: null,
-      init() {
-        if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
-        if (this.ctx.state === 'suspended') this.ctx.resume();
-      },
-      playTick(vol, speed) {
-        if (isMuted) return;
+    /* ---------------------------------------------------------
+       2. CENTRALIZED STORAGE ENGINE
+       --------------------------------------------------------- */
+    const StorageEngine = {
+      PREFIX: 'schoTools_v3_',
+      getKey(key) { return this.PREFIX + key; },
+      save(key, val) {
         try {
-          this.init();
-          let osc = this.ctx.createOscillator();
-          let gainNode = this.ctx.createGain();
-          osc.connect(gainNode); gainNode.connect(this.ctx.destination);
-          osc.type = 'triangle';
-          osc.frequency.setValueAtTime(350 + (1 - speed) * 120, this.ctx.currentTime);
-          gainNode.gain.setValueAtTime(vol * 0.05, this.ctx.currentTime);
-          gainNode.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.04);
-          osc.start(); osc.stop(this.ctx.currentTime + 0.04);
-        } catch (e) {}
+          localStorage.setItem(this.getKey(key), JSON.stringify(val));
+          return true;
+        } catch (e) {
+          console.error('StorageEngine Save Error:', e);
+          return false;
+        }
       },
-      playWin(vol) {
-        if (isMuted) return;
+      load(key, fallback = null) {
         try {
-          this.init();
-          let now = this.ctx.currentTime;
-          [261.63, 329.63, 392.00, 523.25].forEach((freq, idx) => {
-            let osc = this.ctx.createOscillator();
-            let gainNode = this.ctx.createGain();
-            osc.connect(gainNode); gainNode.connect(this.ctx.destination);
-            osc.frequency.setValueAtTime(freq, now + idx * 0.07);
-            gainNode.gain.setValueAtTime(vol * 0.1, now + idx * 0.07);
-            gainNode.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.07 + 0.4);
-            osc.start(now + idx * 0.07); osc.stop(now + idx * 0.07 + 0.4);
-          });
-        } catch (e) {}
+          const item = localStorage.getItem(this.getKey(key));
+          return item ? JSON.parse(item) : fallback;
+        } catch (e) {
+          console.error('StorageEngine Load Error:', e);
+          return fallback;
+        }
       },
-      playClick(vol) {
-        if (isMuted) return;
+      remove(key) {
         try {
-          this.init();
-          let osc = this.ctx.createOscillator();
-          let gainNode = this.ctx.createGain();
-          osc.connect(gainNode); gainNode.connect(this.ctx.destination);
-          osc.frequency.setValueAtTime(550, this.ctx.currentTime);
-          gainNode.gain.setValueAtTime(vol * 0.05, this.ctx.currentTime);
-          gainNode.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.04);
-          osc.start(); osc.stop(this.ctx.currentTime + 0.04);
-        } catch (e) {}
+          localStorage.removeItem(this.getKey(key));
+          return true;
+        } catch (e) { return false; }
       }
     };
 
-    function switchTab(tabId) {
-      if (spinning) return;
-      currentTab = tabId;
-      audioCtxEngine.playClick(soundVolume);
-
-      ['absen', 'spin', 'groups', 'partners'].forEach(id => {
-        const btn = document.getElementById(`navBtn-${id}`);
-        if (id === tabId) {
-          btn.className = "px-4 py-2 rounded-lg text-xs font-bold transition-all bg-brandPrimary text-white shadow-sm";
+    /* ---------------------------------------------------------
+       3. THEME ENGINE & DYNAMIC BACKGROUND CONTROLLER
+       --------------------------------------------------------- */
+    const ThemeEngine = {
+      currentTheme: 'light',
+      init() {
+        this.currentTheme = StorageEngine.load('user_theme', 'light');
+        this.applyTheme();
+      },
+      applyTheme() {
+        if (this.currentTheme === 'dark') {
+          document.documentElement.classList.add('dark');
+          document.body.classList.add('dark');
         } else {
-          btn.className = "px-4 py-2 rounded-lg text-xs font-bold transition-all text-[#64748B] dark:text-[#CBD5E1] hover:text-[#1E293B] dark:hover:text-white";
+          document.documentElement.classList.remove('dark');
+          document.body.classList.remove('dark');
         }
-      });
-
-      ['absen', 'spin', 'groups', 'partners'].forEach(id => {
-        const div = document.getElementById(`tabContent-${id}`);
-        if (id === tabId) div.classList.remove('hidden');
-        else div.classList.add('hidden');
-      });
-
-      syncAttendancePoolLists();
-      if (tabId === 'spin') updateSpinViewData();
-    }
-
-    function toggleMute() {
-      isMuted = !isMuted;
-      document.getElementById('muteBtn').innerText = isMuted ? '🔇' : '🔊';
-    }
-
-    function changeVolume(val) {
-      soundVolume = parseFloat(val);
-      audioCtxEngine.playClick(soundVolume);
-    }
-
-    function toggleTheme() {
-      currentTheme = (currentTheme === 'light') ? 'dark' : 'light';
-      const htmlEl = document.documentElement;
-      const bodyEl = document.body;
-
-      if (currentTheme === 'dark') {
-        htmlEl.classList.add('dark');
-        bodyEl.className = "transition-colors duration-300 min-h-screen flex flex-col relative overflow-x-hidden bg-[#0F172A] text-[#F8FAFC] dark";
-      } else {
-        htmlEl.classList.remove('dark');
-        bodyEl.className = "transition-colors duration-300 min-h-screen flex flex-col relative overflow-x-hidden bg-[#F4F7FA] text-[#1E293B]";
+      },
+      toggle() {
+        this.currentTheme = (this.currentTheme === 'light') ? 'dark' : 'light';
+        this.applyTheme();
+        StorageEngine.save('user_theme', this.currentTheme);
       }
-      audioCtxEngine.playClick(soundVolume);
-    }
+    };
 
-    function initializeDatabase() {
-      const saved = localStorage.getItem('schoTools_attendance_v2');
-      students = saved ? JSON.parse(saved) : CLASS_ROSTER.map(s => ({ ...s, present: true }));
-      
-      savedGroups = localStorage.getItem('schoTools_saved_groups') ? JSON.parse(localStorage.getItem('schoTools_saved_groups')) : [];
-      savedPartners = localStorage.getItem('schoTools_saved_partners') ? JSON.parse(localStorage.getItem('schoTools_saved_partners')) : [];
+    /* ---------------------------------------------------------
+       4. MODAL MANAGER ENGINE
+       --------------------------------------------------------- */
+    const ModalManager = {
+      open(id) {
+        const el = document.getElementById(id);
+        if (el) el.className = "fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-popup";
+      },
+      close(id) {
+        const el = document.getElementById(id);
+        if (el) el.classList.add('hidden');
+      }
+    };
 
-      updateAbsenUI();
-      syncAttendancePoolLists();
-      renderSavedSlots();
-    }
+    /* ---------------------------------------------------------
+       5. SLOT ENGINE (OFFLINE LOCALSTORAGE ARCHIVE)
+       --------------------------------------------------------- */
+    const SlotEngine = {
+      KEY: 'app_slots_archive',
+      activeSaveType: '',
+      activeRenameId: null,
 
-    function saveStateToLocalStorage() {
-      localStorage.setItem('schoTools_attendance_v2', JSON.stringify(students));
-      localStorage.setItem('schoTools_saved_groups', JSON.stringify(savedGroups));
-      localStorage.setItem('schoTools_saved_partners', JSON.stringify(savedPartners));
-    }
+      getAllSlots() {
+        return StorageEngine.load(this.KEY, []);
+      },
+      saveSlot(type, title, data) {
+        const slots = this.getAllSlots();
+        const newSlot = {
+          id: 'slot_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4),
+          type: type,
+          title: title || `${type.toUpperCase()} Slot`,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+          data: data
+        };
+        slots.unshift(newSlot);
+        StorageEngine.save(this.KEY, slots);
+        this.renderSlots(type);
+        return newSlot;
+      },
+      deleteSlot(id, type) {
+        let slots = this.getAllSlots().filter(s => s.id !== id);
+        StorageEngine.save(this.KEY, slots);
+        this.renderSlots(type);
+      },
+      renameSlot(id, newTitle, type) {
+        const slots = this.getAllSlots();
+        const target = slots.find(s => s.id === id);
+        if (target) {
+          target.title = newTitle;
+          target.updatedAt = new Date().toISOString();
+          StorageEngine.save(this.KEY, slots);
+          this.renderSlots(type);
+        }
+      },
+      triggerSave(type) {
+        this.activeSaveType = type;
+        const defaultTitles = { groups: 'Formasi Kelompok Baru', partners: 'Formasi Sesi Duo Baru', spin: 'Log Hasil Spin Baru' };
+        document.getElementById('newSlotNameInput').value = defaultTitles[type] || 'Slot Baru';
+        ModalManager.open('saveSlotModal');
+      },
+      confirmSave() {
+        const name = document.getElementById('newSlotNameInput').value.trim();
+        if (!name) return;
 
-    function updateAbsenUI() {
-      const activeCount = students.filter(s => s.present).length;
-      const absentCount = students.length - activeCount;
-      const progressPercent = Math.round((activeCount / students.length) * 100);
+        let payload = {};
+        if (this.activeSaveType === 'groups') {
+          if (!GroupEngine.generatedData) { AppController.showToast("Belum ada kelompok di-generate!"); return; }
+          payload = { groups: GroupEngine.generatedData.data, names: GroupEngine.generatedData.names };
+        } else if (this.activeSaveType === 'partners') {
+          if (PartnerEngine.generatedSessions.length === 0) { AppController.showToast("Belum ada partner di-generate!"); return; }
+          payload = { sessions: PartnerEngine.generatedSessions };
+        } else if (this.activeSaveType === 'spin') {
+          if (SpinEngine.history.length === 0) { AppController.showToast("Log spin masih kosong!"); return; }
+          payload = { history: [...SpinEngine.history], activeFilter: SpinEngine.activeFilter };
+        }
 
-      document.getElementById('rekapHadirCount').innerText = activeCount;
-      document.getElementById('rekapAbsenCount').innerText = absentCount;
-      document.getElementById('rekapProgressBar').style.width = `${progressPercent}%`;
+        this.saveSlot(this.activeSaveType, name, payload);
+        ModalManager.close('saveSlotModal');
+        AppController.showToast("Formasi berhasil disimpan ke slot offline!");
+      },
+      promptRename(id, oldTitle, type) {
+        this.activeRenameId = id;
+        this.activeSaveType = type;
+        document.getElementById('renameSlotInput').value = oldTitle;
+        ModalManager.open('renameSlotModal');
+      },
+      confirmRename() {
+        const newTitle = document.getElementById('renameSlotInput').value.trim();
+        if (newTitle && this.activeRenameId) {
+          this.renameSlot(this.activeRenameId, newTitle, this.activeSaveType);
+          ModalManager.close('renameSlotModal');
+          AppController.showToast("Nama slot berhasil diperbarui!");
+        }
+      },
+      openSlot(id, type) {
+        const slot = this.getAllSlots().find(s => s.id === id);
+        if (!slot) return;
 
-      renderAbsenRoster();
-    }
-
-    function renderAbsenRoster() {
-      const container = document.getElementById('studentGrid');
-      container.innerHTML = '';
-      const filtered = students.filter(s => s.name.toLowerCase().includes(searchQuery.toLowerCase()));
-
-      filtered.forEach(s => {
-        const isPresent = s.present;
-        const div = document.createElement('div');
-        div.className = `p-4 rounded-xl border transition-all bg-white dark:bg-[#1E293B] ${isPresent ? 'border-[#D6DEE8] dark:border-[#334155]' : 'border-statusError/20 bg-statusError/5 opacity-60'}`;
+        if (type === 'groups') {
+          GroupEngine.generatedData = { data: slot.data.groups, names: slot.data.names };
+          document.getElementById('groupsEmptyState').classList.add('hidden');
+          document.getElementById('groupOutputWrapper').classList.remove('hidden');
+          GroupEngine.renderUI(slot.data.groups, slot.data.names);
+          AppController.showToast(`Slot Kelompok "${slot.title}" dimuat!`);
+        } else if (type === 'partners') {
+          PartnerEngine.generatedSessions = slot.data.sessions;
+          document.getElementById('partnersEmptyState').classList.add('hidden');
+          document.getElementById('partnerOutputWrapper').classList.remove('hidden');
+          PartnerEngine.renderUI();
+          AppController.showToast(`Slot Partner "${slot.title}" dimuat!`);
+        } else if (type === 'spin') {
+          SpinEngine.history = slot.data.history || [];
+          if (slot.data.activeFilter) SpinEngine.setGenderFilter(slot.data.activeFilter);
+          SpinEngine.renderHistory();
+          SpinEngine.updateViewData();
+          AppController.showToast(`Slot Spin "${slot.title}" dimuat!`);
+        }
+      },
+      renderSlots(type) {
+        const allSlots = this.getAllSlots().filter(s => s.type === type);
+        const container = document.getElementById(`saved${type.charAt(0).toUpperCase() + type.slice(1)}Container`);
+        const emptyState = document.getElementById(`saved${type.charAt(0).toUpperCase() + type.slice(1)}Empty`);
         
-        div.innerHTML = `
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 w-full">
-            <div class="flex items-center gap-3">
-              <div class="w-8 h-8 rounded-full bg-[#EEF3F8] dark:bg-[#273449] flex items-center justify-center text-xs font-black text-brandPrimary dark:text-white">${s.id}</div>
-              <div>
-                <p class="text-sm font-bold ${isPresent ? 'text-[#1E293B] dark:text-[#F8FAFC]' : 'text-[#64748B] dark:text-[#CBD5E1] line-through'}">${s.name}</p>
-                <p class="text-[9px] font-black text-[#64748B] dark:text-[#CBD5E1] uppercase">${s.gender === 'P' ? 'PEREMPUAN' : 'LAKI-LAKI'} • ${s.role}</p>
+        if (!container) return;
+        container.innerHTML = '';
+
+        if (allSlots.length === 0) {
+          if (emptyState) emptyState.classList.remove('hidden');
+          return;
+        }
+        if (emptyState) emptyState.classList.add('hidden');
+
+        allSlots.forEach(slot => {
+          const formattedDate = new Date(slot.updatedAt).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', day: 'numeric', month: 'short' });
+          const div = document.createElement('div');
+          div.className = "p-3 bg-[#F1F5F9]/80 dark:bg-[#090D16]/80 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-2 border border-[#CBD5E1] dark:border-darkBorder hover:border-brandPrimary transition";
+          
+          let subDetails = "";
+          if (type === 'groups') subDetails = `${slot.data.groups ? slot.data.groups.length : 0} Kelompok`;
+          else if (type === 'partners') subDetails = `${slot.data.sessions ? slot.data.sessions.length : 0} Sesi Duo`;
+          else if (type === 'spin') subDetails = `${slot.data.history ? slot.data.history.length : 0} Output Log`;
+
+          div.innerHTML = `
+            <div class="overflow-hidden pr-2">
+              <p class="font-bold text-xs text-[#0F172A] dark:text-[#F8FAFC] truncate uppercase">${slot.title}</p>
+              <p class="text-[9px] font-semibold text-[#64748B] dark:text-[#94A3B8]">${formattedDate} • ${subDetails}</p>
+            </div>
+            <div class="flex items-center gap-1.5 shrink-0 self-end sm:self-center">
+              <button onclick="SlotEngine.openSlot('${slot.id}', '${type}')" class="px-2.5 py-1.5 bg-brandPrimary text-white text-[10px] font-black rounded-lg hover:bg-blue-600 transition active:scale-95">BUKA</button>
+              <button onclick="SlotEngine.promptRename('${slot.id}', '${slot.title.replace(/'/g, "\\'")}', '${type}')" class="px-2.5 py-1.5 bg-[#F1F5F9] dark:bg-darkCard border border-[#CBD5E1] dark:border-darkBorder text-[10px] font-bold rounded-lg text-[#0F172A] dark:text-[#F8FAFC] hover:bg-[#E2E8F0] transition active:scale-95">EDIT</button>
+              <button onclick="SlotEngine.deleteSlot('${slot.id}', '${type}')" class="px-2 py-1.5 bg-statusError/10 text-statusError text-[10px] font-bold rounded-lg hover:bg-statusError/20 transition active:scale-95">HAPUS</button>
+            </div>
+          `;
+          container.appendChild(div);
+        });
+      }
+    };
+
+    /* ---------------------------------------------------------
+       6. ATTENDANCE ENGINE MODULE
+       --------------------------------------------------------- */
+    const AttendanceEngine = {
+      students: [],
+      searchQuery: '',
+
+      init() {
+        const saved = StorageEngine.load('attendance_db_v3');
+        if (saved && Array.isArray(saved)) {
+          this.students = saved;
+        } else {
+          this.students = RosterConfig.CLASS_ROSTER.map(s => ({ ...s, present: true }));
+        }
+        this.updateUI();
+        this.syncPools();
+      },
+      save() {
+        StorageEngine.save('attendance_db_v3', this.students);
+      },
+      toggleItem(id) {
+        if (SpinEngine.spinning) return;
+        this.students = this.students.map(s => s.id === id ? { ...s, present: !s.present } : s);
+        this.save();
+        this.updateUI();
+        this.syncPools();
+        SpinEngine.updateViewData();
+        PriorityEngine.renderRows();
+      },
+      setAll(status) {
+        this.students = this.students.map(s => ({ ...s, present: status }));
+        this.save();
+        this.updateUI();
+        this.syncPools();
+        SpinEngine.updateViewData();
+        PriorityEngine.renderRows();
+        AppController.showToast(status ? "Semua siswa ditandai Hadir!" : "Semua siswa ditandai Absen!");
+      },
+      handleSearch(query) {
+        this.searchQuery = query;
+        this.renderRoster();
+      },
+      updateUI() {
+        const activeCount = this.students.filter(s => s.present).length;
+        const absentCount = this.students.length - activeCount;
+        const progressPercent = Math.round((activeCount / this.students.length) * 100);
+
+        document.getElementById('rekapHadirCount').innerText = activeCount;
+        document.getElementById('rekapAbsenCount').innerText = absentCount;
+        document.getElementById('rekapProgressBar').style.width = `${progressPercent}%`;
+
+        this.renderRoster();
+      },
+      renderRoster() {
+        const container = document.getElementById('studentGrid');
+        container.innerHTML = '';
+        const filtered = this.students.filter(s => s.name.toLowerCase().includes(this.searchQuery.toLowerCase()));
+
+        filtered.forEach(s => {
+          const isPresent = s.present;
+          const div = document.createElement('div');
+          div.className = `p-3 sm:p-3.5 rounded-2xl border transition-all bg-white dark:bg-darkCard ${isPresent ? 'border-[#CBD5E1] dark:border-darkBorder' : 'border-statusError/30 bg-statusError/5 opacity-75'}`;
+          
+          div.innerHTML = `
+            <div class="flex items-center justify-between gap-2 w-full">
+              <div class="flex items-center gap-2.5 min-w-0">
+                <div class="w-8 h-8 rounded-xl bg-[#F1F5F9] dark:bg-[#090D16] flex items-center justify-center text-xs font-black text-brandPrimary dark:text-white shrink-0 border border-transparent dark:border-darkBorder">${s.id}</div>
+                <div class="truncate">
+                  <p class="text-xs font-bold truncate ${isPresent ? 'text-[#0F172A] dark:text-[#F8FAFC]' : 'text-[#64748B] dark:text-[#94A3B8] line-through'}">${s.name}</p>
+                  <p class="text-[9px] font-black text-[#64748B] dark:text-[#94A3B8] uppercase truncate">${s.gender === 'P' ? 'PEREMPUAN' : 'LAKI-LAKI'} • ${s.role}</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-1 shrink-0">
+                <button onclick="AttendanceEngine.viewDetail(${s.id})" class="px-2 py-1.5 bg-[#F1F5F9] dark:bg-[#090D16] text-[9px] font-black rounded-lg text-brandPrimary dark:text-white border border-[#CBD5E1] dark:border-darkBorder hover:bg-[#E2E8F0] active:scale-95 transition">DETAIL</button>
+                <button onclick="AttendanceEngine.toggleItem(${s.id})" class="text-[9px] font-black px-2.5 py-1.5 rounded-lg border transition active:scale-95 ${isPresent ? 'bg-statusSuccess/10 text-statusSuccess border-statusSuccess/30 hover:bg-statusSuccess/20' : 'bg-statusError/10 text-statusError border-statusError/30 hover:bg-statusError/20'}">${isPresent ? 'HADIR' : 'ABSEN'}</button>
               </div>
             </div>
-            <div class="flex items-center gap-1.5 justify-end">
-              <button onclick="viewStudentDetail(${s.id})" class="px-2.5 py-1.5 bg-[#EEF3F8] dark:bg-[#273449] text-[10px] font-black rounded-lg text-brandPrimary dark:text-white border border-[#D6DEE8]">DETAIL</button>
-              <button onclick="toggleAttendanceItem(${s.id})" class="text-[9px] font-black px-2 py-1 rounded-md border transition ${isPresent ? 'bg-[#3FAE6A]/10 text-[#3FAE6A] border-[#3FAE6A]/30' : 'bg-[#D9534F]/10 text-statusError border-[#D9534F]/30'}">${isPresent ? 'HADIR' : 'ABSEN'}</button>
-            </div>
-          </div>
-        `;
-        container.appendChild(div);
-      });
-    }
-
-    function toggleAttendanceItem(id) {
-      if (spinning) return;
-      students = students.map(s => s.id === id ? { ...s, present: !s.present } : s);
-      saveStateToLocalStorage();
-      updateAbsenUI();
-      syncAttendancePoolLists();
-      updateSpinViewData();
-    }
-
-    function setAllAttendance(status) {
-      students = students.map(s => ({ ...s, present: status }));
-      saveStateToLocalStorage();
-      updateAbsenUI();
-      syncAttendancePoolLists();
-      updateSpinViewData();
-      showToastNotification(status ? "Semua siswa ditandai Hadir!" : "Semua siswa ditandai Absen!");
-    }
-
-    function handleSearch(val) {
-      searchQuery = val;
-      renderAbsenRoster();
-    }
-
-    function viewStudentDetail(id) {
-      const student = students.find(s => s.id === id);
-      if (!student) return;
-
-      document.getElementById('detailStudentTitle').innerText = student.name;
-      document.getElementById('detailStudentGender').innerText = student.gender === 'P' ? 'Perempuan' : 'Laki-Laki';
-      document.getElementById('detailStudentRole').innerText = student.role;
-      
-      const b = document.getElementById('detailStudentStatusBadge');
-      b.innerText = student.present ? 'HADIR' : 'ABSEN';
-      b.className = student.present ? "font-black px-2 py-0.5 rounded text-[10px] bg-[#DCFCE7] text-[#14532D]" : "font-black px-2 py-0.5 rounded text-[10px] bg-[#FEE2E2] text-[#7F1D1D]";
-
-      document.getElementById('studentDetailModal').className = "fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-popup";
-    }
-
-    function closeDetailModal() { document.getElementById('studentDetailModal').classList.add('hidden'); }
-
-    function syncAttendancePoolLists() {
-      ['Spin', 'Groups', 'Partners'].forEach(name => {
-        const pool = document.getElementById(`attendancePool${name}`);
-        if (!pool) return;
-        pool.innerHTML = '';
-
-        students.forEach(s => {
-          const div = document.createElement('div');
-          div.className = `flex items-center justify-between p-2 rounded-xl border text-xs cursor-pointer transition ${s.present ? 'bg-white dark:bg-[#1E293B] border-[#D6DEE8] dark:border-[#334155] text-[#1E293B] dark:text-[#F8FAFC]' : 'bg-[#D9534F]/5 border-[#D9534F]/15 opacity-50'}`;
-          div.onclick = () => toggleAttendanceItem(s.id);
-          div.innerHTML = `<span>${s.id}. ${s.name}</span><span class="text-[9px] font-black">${s.present ? 'HADIR' : 'ABSEN'}</span>`;
-          pool.appendChild(div);
+          `;
+          container.appendChild(div);
         });
-      });
-    }
+      },
+      viewDetail(id) {
+        const student = this.students.find(s => s.id === id);
+        if (!student) return;
 
-    function updateSpinViewData() {
-      document.getElementById('count-ALL').innerText = students.filter(s => s.present).length;
-      document.getElementById('count-MALE').innerText = students.filter(s => s.present && s.gender === GENDER_MALE).length;
-      document.getElementById('count-FEMALE').innerText = students.filter(s => s.present && s.gender === GENDER_FEMALE).length;
-      document.getElementById('eligiblePoolCount').innerText = getEligiblePool().length;
-    }
-
-    function setGenderFilter(g) {
-      if (spinning) return;
-      activeGenderFilter = g;
-      ['ALL', 'MALE', 'FEMALE'].forEach(type => {
-        const btn = document.getElementById(`filterBtn-${type}`);
-        if (type === g) {
-          btn.className = "w-full flex items-center justify-between px-3 py-2 rounded-xl border text-xs font-bold bg-brandPrimary border-brandPrimary text-white shadow-sm";
-        } else {
-          btn.className = "w-full flex items-center justify-between px-3 py-2 rounded-xl border text-xs font-bold bg-white dark:bg-[#1E293B] border-[#D6DEE8] dark:border-[#334155] text-[#64748B] dark:text-[#CBD5E1]";
-        }
-      });
-      updateSpinViewData();
-    }
-
-    function toggleInstantMode() {
-      isInstantMode = !isInstantMode;
-      document.getElementById('instantCheck').innerText = isInstantMode ? '✓' : '';
-    }
-
-    function getFilteredPool() {
-      let pool = students.filter(s => s.present);
-      if (activeGenderFilter === 'MALE') pool = pool.filter(s => s.gender === GENDER_MALE);
-      if (activeGenderFilter === 'FEMALE') pool = pool.filter(s => s.gender === GENDER_FEMALE);
-      return pool;
-    }
-
-    function getEligiblePool() {
-      const fp = getFilteredPool();
-      const ids = new Set(spinHistory.map(h => h.id));
-      return fp.filter(s => !ids.has(s.id));
-    }
-
-    function startSpin() {
-      if (spinning) return;
-      const pool = getFilteredPool();
-      if (pool.length === 0) {
-        showToastNotification("Tidak ada data presensi valid untuk diacak!");
-        return;
-      }
-
-      const eligible = getEligiblePool();
-
-      if (isInstantMode) {
-        const shuffled = shuffleArray(pool);
-        spinHistory = shuffled.map((s, idx) => ({ ...s, index: shuffled.length - idx }));
-        winner = shuffled[0];
-        audioCtxEngine.playWin(soundVolume);
-        renderSpinHistory(); updateSpinViewData();
+        document.getElementById('detailStudentBadge').innerText = student.id;
+        document.getElementById('detailStudentTitle').innerText = student.name;
+        document.getElementById('detailStudentGender').innerText = student.gender === 'P' ? 'Perempuan' : 'Laki-Laki';
+        document.getElementById('detailStudentRole').innerText = student.role;
         
-        const toast = document.getElementById('instantToastAlert');
-        toast.className = "fixed inset-0 z-50 flex items-center justify-center pointer-events-none px-4 animate-popup";
-        setTimeout(() => toast.classList.add('hidden'), 1200);
-        return;
-      }
+        const b = document.getElementById('detailStudentStatusBadge');
+        b.innerText = student.present ? 'HADIR' : 'ABSEN';
+        b.className = student.present ? "font-black px-2 py-0.5 rounded text-[10px] bg-emerald-500/20 text-emerald-600 dark:text-emerald-400" : "font-black px-2 py-0.5 rounded text-[10px] bg-rose-500/20 text-rose-600 dark:text-rose-400";
 
-      if (eligible.length === 0) {
-        document.getElementById('exhaustedAlertModal').className = "fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-popup";
-        return;
-      }
+        ModalManager.open('studentDetailModal');
+      },
+      syncPools() {
+        ['Spin', 'Groups', 'Partners'].forEach(name => {
+          const pool = document.getElementById(`attendancePool${name}`);
+          if (!pool) return;
+          pool.innerHTML = '';
 
-      spinning = true;
-      const winItem = shuffleArray(eligible)[0];
-      const container = document.getElementById('carouselContainer');
-      container.innerHTML = '';
-      container.style.transform = 'translateX(0px)';
-
-      const totalSlots = 52; const winIndex = 42;
-      const list = Array.from({ length: totalSlots }, (_, i) => i === winIndex ? winItem : eligible[Math.floor(Math.random() * eligible.length)]);
-
-      list.forEach(c => {
-        const card = document.createElement('div');
-        card.style.width = `${cardWidth}px`; card.style.marginRight = `${cardGap}px`;
-        card.className = "shrink-0 h-20 rounded-xl border bg-white dark:bg-[#1E293B] flex items-center px-4 border-[#D6DEE8] dark:border-[#334155] font-bold text-xs uppercase truncate";
-        card.innerText = c.name;
-        container.appendChild(card);
-      });
-
-      setTimeout(() => {
-        const cardEl = container.children[winIndex];
-        const vRect = document.getElementById('carouselViewport').getBoundingClientRect();
-        const winnerMiddle = (cardEl.getBoundingClientRect().left - container.getBoundingClientRect().left) + (cardEl.getBoundingClientRect().width / 2);
-        const finalX = -(winnerMiddle - (vRect.width / 2));
-
-        const duration = 4000; const start = performance.now();
-        particleSpeedScale.current = 10.0;
-
-        let lastIndex = -1;
-
-        function animate(now) {
-          const elapsed = now - start;
-          const progress = Math.min(elapsed / duration, 1);
-          const ease = 1 - Math.pow(1 - progress, 4);
-          const currentTranslate = finalX * ease;
-          container.style.transform = `translateX(${currentTranslate}px)`;
-
-          const curIndex = Math.floor(Math.abs(currentTranslate) / (cardWidth + cardGap));
-          if(curIndex !== lastIndex) {
-            audioCtxEngine.playTick(soundVolume, progress);
-            lastIndex = curIndex;
-          }
-
-          if (progress < 1) {
-            requestAnimationFrame(animate);
-          } else {
-            particleSpeedScale.current = 1.0;
-            audioCtxEngine.playWin(soundVolume);
-            winner = winItem;
-            spinHistory.unshift({ ...winItem, index: spinHistory.length + 1 });
-            renderSpinHistory(); updateSpinViewData();
-            
-            document.getElementById('winnerStudentName').innerText = winner.name;
-            document.getElementById('winnerModal').className = "fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-popup";
-            spinning = false;
-          }
-        }
-        requestAnimationFrame(animate);
-      }, 50);
-    }
-
-    function closeWinnerModal() { document.getElementById('winnerModal').classList.add('hidden'); }
-    function triggerResetConfirm() { document.getElementById('resetConfirmModal').className = "fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-popup"; }
-    function closeResetConfirmModal() { document.getElementById('resetConfirmModal').classList.add('hidden'); }
-    function confirmResetSession() { spinHistory = []; closeResetConfirmModal(); renderSpinHistory(); updateSpinViewData(); }
-    function closeExhaustedModalAndReset() { document.getElementById('exhaustedAlertModal').classList.add('hidden'); spinHistory = []; updateSpinViewData(); renderSpinHistory(); }
-
-    function renderSpinHistory() {
-      const container = document.getElementById('spinHistoryContainer');
-      const empty = document.getElementById('spinHistoryEmpty');
-      const ctrl = document.getElementById('historyControls');
-      container.innerHTML = '';
-
-      document.getElementById('historyCount').innerText = spinHistory.length;
-      if (spinHistory.length === 0) { empty.classList.remove('hidden'); ctrl.classList.add('hidden'); return; }
-      empty.classList.add('hidden'); ctrl.classList.remove('hidden');
-
-      spinHistory.forEach(h => {
-        const div = document.createElement('div');
-        div.className = "p-3 bg-[#EEF3F8]/50 dark:bg-[#111827]/50 border border-[#D6DEE8] dark:border-[#334155] rounded-xl flex justify-between items-center text-xs font-bold";
-        div.innerHTML = `<span>#${h.index} - ${h.name}</span><button onclick="deleteHist(${h.index})" class="text-statusError">Hapus</button>`;
-        container.appendChild(div);
-      });
-    }
-
-    function deleteHist(idx) { spinHistory = spinHistory.filter(h => h.index !== idx); renderSpinHistory(); updateSpinViewData(); }
-    function clearHistory() { spinHistory = []; renderSpinHistory(); updateSpinViewData(); }
-
-    function cleanAllHistoryText() {
-      const dateStr = new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-      let txt = `*OUTPUT HASIL SPIN - MASTER LOG* 🎲\n_${dateStr}_\n\n`;
-      [...spinHistory].reverse().forEach((s, i) => txt += `${i + 1}. ${s.name}\n`);
-      return txt.trim();
-    }
-
-    function copySpinHistory() { navigator.clipboard.writeText(cleanAllHistoryText()); showToastNotification("Log hasil acak berhasil disalin!"); }
-    function shareSpinToWA() { window.open(`https://wa.me/?text=${encodeURIComponent(cleanAllHistoryText())}`, '_blank'); }
-
-    function generateGroups() {
-      const active = students.filter(s => s.present);
-      if (active.length < 2) { showToastNotification("Minimal harus ada 2 siswa hadir!"); return; }
-      const count = parseInt(document.getElementById('groupCountInput').value) || 4;
-      
-      document.getElementById('groupsEmptyState').classList.add('hidden');
-      document.getElementById('groupOutputWrapper').classList.remove('hidden');
-
-      let list = shuffleArray(active);
-      let out = Array.from({ length: count }, () => []);
-      list.forEach((s, i) => out[i % count].push(s));
-
-      let customInput = document.getElementById('groupCustomNamesInput').value;
-      let customNames = customInput.split(',').map(n => n.trim()).filter(n => n !== "");
-
-      generatedGroups = { data: out, names: customNames };
-      
-      const grid = document.getElementById('generatedGroupsGrid');
-      grid.innerHTML = '';
-      out.forEach((g, idx) => {
-        const nameLabel = customNames[idx] || `KELOMPOK ${idx + 1}`;
-        const div = document.createElement('div');
-        div.className = "bg-white dark:bg-[#1E293B] border border-[#D6DEE8] dark:border-[#334155] rounded-2xl p-4 shadow-sm";
-        let str = `<h5 class="font-bold text-brandPrimary mb-2 uppercase">${nameLabel}</h5>`;
-        g.forEach(s => str += `<p class="text-xs font-semibold py-0.5 border-b last:border-0 border-[#EEF3F8] dark:border-[#293548] uppercase">${s.name}</p>`);
-        div.innerHTML = str;
-        grid.appendChild(div);
-      });
-    }
-
-    function getGroupOutputText() {
-      let txt = "*=== HASIL PEMBAGIAN KELOMPOK ===*\n\n";
-      generatedGroups.data.forEach((g, idx) => {
-        const nameLabel = generatedGroups.names[idx] || `KELOMPOK ${idx + 1}`;
-        txt += `*${nameLabel.toUpperCase()}*\n`;
-        g.forEach(s => txt += `- ${s.name}\n`);
-        txt += "\n";
-      });
-      return txt.trim();
-    }
-    function copyGroupOutput() { navigator.clipboard.writeText(getGroupOutputText()); showToastNotification("Susunan kelompok disalin!"); }
-
-    function generatePartners() {
-      const active = students.filter(s => s.present);
-      if (active.length < 2) { showToastNotification("Minimal harus ada 2 siswa hadir!"); return; }
-      const sessions = parseInt(document.getElementById('partnerSessionInput').value) || 1;
-
-      document.getElementById('partnersEmptyState').classList.add('hidden');
-      document.getElementById('partnerOutputWrapper').classList.remove('hidden');
-
-      const wrapper = document.getElementById('generatedPartnersSesiList');
-      wrapper.innerHTML = '';
-      generatedPartners = [];
-
-      for (let s = 1; s <= sessions; s++) {
-        let pool = shuffleArray(active);
-        let pairs = [];
-        while(pool.length > 1) pairs.push([pool.pop(), pool.pop()]);
-        let solo = pool.length > 0 ? pool.pop() : null;
-
-        generatedPartners.push({ sessionNum: s, pairs, solo });
-
-        const div = document.createElement('div');
-        div.className = "bg-white dark:bg-[#1E293B] border border-[#D6DEE8] dark:border-[#334155] rounded-2xl p-4 shadow-sm";
-        let str = `<h5 class="font-bold text-brandAccent mb-3 text-center">SESI ${s}</h5><div class="grid grid-cols-1 md:grid-cols-2 gap-2">`;
-        pairs.forEach(p => str += `<div class="p-2 bg-[#EEF3F8]/40 dark:bg-[#111827]/40 rounded border text-center text-xs font-bold uppercase">${p[0].name} ↔ ${p[1].name}</div>`);
-        if (solo) str += `<div class="p-2 bg-statusError/10 text-statusError text-center text-xs font-bold rounded col-span-full">⚠️ SOLO: ${solo.name}</div>`;
-        str += `</div>`;
-        div.innerHTML = str;
-        wrapper.appendChild(div);
-      }
-    }
-
-    function getPartnerOutputText() {
-      let txt = "*=== HASIL ACUR PASANGAN MATCHING ===*\n\n";
-      generatedPartners.forEach(s => {
-        txt += `*SESI ${s.sessionNum}*\n`;
-        s.pairs.forEach(p => txt += `${p[0].name} ↔ ${p[1].name}\n`);
-        if (s.solo) txt += `${s.solo.name} (SOLO)\n`;
-        txt += "\n";
-      });
-      return txt.trim();
-    }
-    function copyPartnerOutput() { navigator.clipboard.writeText(getPartnerOutputText()); showToastNotification("Susunan partner matching disalin!"); }
-
-    function triggerSaveSlot(type) {
-      savingSlotType = type;
-      document.getElementById('newSlotNameInput').value = type === 'groups' ? 'Formasi Kelompok Baru' : 'Formasi Sesi Duo Baru';
-      document.getElementById('saveSlotModal').className = "fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-popup";
-    }
-
-    function closeSaveSlotModal() { document.getElementById('saveSlotModal').classList.add('hidden'); }
-    
-    function confirmSaveSlot() {
-      const name = document.getElementById('newSlotNameInput').value.trim();
-      if (!name) return;
-      const timestamp = new Date().toLocaleTimeString('id-ID', {hour: '2-digit', minute:'2-digit'});
-
-      if (savingSlotType === 'groups') {
-        savedGroups.unshift({ id: `g-${Date.now()}`, name, timestamp, groups: generatedGroups.data, names: generatedGroups.names });
-      } else {
-        savedPartners.unshift({ id: `p-${Date.now()}`, name, timestamp, sessions: generatedPartners });
-      }
-      saveStateToLocalStorage(); renderSavedSlots(); closeSaveSlotModal();
-      showToastNotification("Formasi berhasil disimpan ke database lokal!");
-    }
-
-    function renderSavedSlots() {
-      const gc = document.getElementById('savedGroupsContainer'); gc.innerHTML = '';
-      if (savedGroups.length > 0) document.getElementById('savedGroupsEmpty').classList.add('hidden');
-      else document.getElementById('savedGroupsEmpty').classList.remove('hidden');
-
-      savedGroups.forEach(s => {
-        const div = document.createElement('div');
-        div.className = "p-3 bg-[#EEF3F8]/60 dark:bg-[#111827]/60 rounded-xl flex justify-between items-center text-xs border border-[#D6DEE8] dark:border-[#334155]";
-        div.innerHTML = `<div><p class="font-bold text-brandPrimary uppercase">${s.name}</p><span class="text-[10px] opacity-60">Tersimpan pukul ${s.timestamp}</span></div><button onclick="delGroupSlot('${s.id}')" class="text-statusError font-bold">Hapus</button>`;
-        gc.appendChild(div);
-      });
-
-      const pc = document.getElementById('savedPartnersContainer'); pc.innerHTML = '';
-      if (savedPartners.length > 0) document.getElementById('savedPartnersEmpty').classList.add('hidden');
-      else document.getElementById('savedPartnersEmpty').classList.remove('hidden');
-
-      savedPartners.forEach(s => {
-        const div = document.createElement('div');
-        div.className = "p-3 bg-[#EEF3F8]/60 dark:bg-[#111827]/60 rounded-xl flex justify-between items-center text-xs border border-[#D6DEE8] dark:border-[#334155]";
-        div.innerHTML = `<div><p class="font-bold text-brandAccent uppercase">${s.name}</p><span class="text-[10px] opacity-60">Tersimpan pukul ${s.timestamp}</span></div><button onclick="delPartnerSlot('${s.id}')" class="text-statusError font-bold">Hapus</button>`;
-        pc.appendChild(div);
-      });
-    }
-
-    function delGroupSlot(id) { savedGroups = savedGroups.filter(s => s.id !== id); saveStateToLocalStorage(); renderSavedSlots(); }
-    function delPartnerSlot(id) { savedPartners = savedPartners.filter(s => s.id !== id); saveStateToLocalStorage(); renderSavedSlots(); }
-
-    function showToastNotification(m) {
-      const el = document.getElementById('toastAlert');
-      document.getElementById('toastMessage').innerText = m;
-      el.classList.remove('hidden');
-      setTimeout(() => el.classList.add('hidden'), 2500);
-    }
-
-    window.onload = function() {
-      initializeDatabase();
-      
-      if(window.innerWidth < 640) cardWidth = 180;
-      else if(window.innerWidth < 1024) cardWidth = 220;
-
-      const canvas = document.getElementById('particleCanvas');
-      const ctx = canvas.getContext('2d');
-      canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-      const dots = Array.from({ length: 25 }, () => ({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: Math.random()*2+1, sx: (Math.random()-0.5)*0.2 }));
-      
-      function update() {
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        ctx.fillStyle = '#2F6FDE'; ctx.globalAlpha = 0.12;
-        dots.forEach(d => {
-          d.x += d.sx * particleSpeedScale.current;
-          if (d.x < 0 || d.x > canvas.width) d.x = Math.random()*canvas.width;
-          ctx.beginPath(); ctx.arc(d.x, d.y, d.r, 0, Math.PI*2); ctx.fill();
+          this.students.forEach(s => {
+            const div = document.createElement('div');
+            div.className = `flex items-center justify-between p-2 rounded-xl border text-xs cursor-pointer transition ${s.present ? 'bg-white dark:bg-darkCard border-[#CBD5E1] dark:border-darkBorder text-[#0F172A] dark:text-[#F8FAFC]' : 'bg-statusError/5 border-statusError/15 opacity-50'}`;
+            div.onclick = () => this.toggleItem(s.id);
+            div.innerHTML = `<span class="truncate pr-2">${s.id}. ${s.name}</span><span class="text-[9px] font-black shrink-0">${s.present ? 'HADIR' : 'ABSEN'}</span>`;
+            pool.appendChild(div);
+          });
         });
-        requestAnimationFrame(update);
       }
-      update();
     };
 
-    function shuffleArray(array) {
-      let arr = [...array];
-      for (let i = arr.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
+    /* ---------------------------------------------------------
+       7. SPIN WHEELS ENGINE MODULE (LIGHTWEIGHT ANIMATION)
+       --------------------------------------------------------- */
+    const SpinEngine = {
+      activeFilter: 'ALL',
+      isInstantMode: false,
+      history: [],
+      spinning: false,
+      winner: null,
+      cardGap: 10,
+
+      getCardWidth() {
+        if (window.innerWidth < 480) return 170;
+        if (window.innerWidth < 768) return 210;
+        return 260;
+      },
+      updateViewData() {
+        const active = AttendanceEngine.students.filter(s => s.present);
+        document.getElementById('count-ALL').innerText = active.length;
+        document.getElementById('count-MALE').innerText = active.filter(s => s.gender === 'L').length;
+        document.getElementById('count-FEMALE').innerText = active.filter(s => s.gender === 'P').length;
+        document.getElementById('eligiblePoolCount').innerText = this.getEligiblePool().length;
+      },
+      setGenderFilter(g) {
+        if (this.spinning) return;
+        this.activeFilter = g;
+        ['ALL', 'MALE', 'FEMALE'].forEach(type => {
+          const btn = document.getElementById(`filterBtn-${type}`);
+          if (type === g) {
+            btn.className = "w-full flex items-center justify-between px-3 py-2.5 rounded-xl border text-xs font-bold transition bg-brandPrimary border-brandPrimary text-white shadow-sm active:scale-95";
+          } else {
+            btn.className = "w-full flex items-center justify-between px-3 py-2.5 rounded-xl border text-xs font-bold bg-white dark:bg-darkCard border-[#CBD5E1] dark:border-darkBorder text-[#64748B] dark:text-[#94A3B8] active:scale-95";
+          }
+        });
+        this.updateViewData();
+      },
+      toggleInstantMode() {
+        this.isInstantMode = !this.isInstantMode;
+        document.getElementById('instantCheck').innerText = this.isInstantMode ? '✓' : '';
+      },
+      getFilteredPool() {
+        let pool = AttendanceEngine.students.filter(s => s.present);
+        if (this.activeFilter === 'MALE') pool = pool.filter(s => s.gender === 'L');
+        if (this.activeFilter === 'FEMALE') pool = pool.filter(s => s.gender === 'P');
+        return pool;
+      },
+      getEligiblePool() {
+        const fp = this.getFilteredPool();
+        const ids = new Set(this.history.map(h => h.id));
+        return fp.filter(s => !ids.has(s.id));
+      },
+      start() {
+        if (SpinEngine.spinning) return;
+        const pool = SpinEngine.getFilteredPool();
+        if (pool.length === 0) {
+          AppController.showToast("Tidak ada data presensi valid untuk diacak!");
+          return;
+        }
+
+        const eligible = SpinEngine.getEligiblePool();
+
+        if (SpinEngine.isInstantMode) {
+          const shuffled = AppController.shuffleArray(pool);
+          SpinEngine.history = shuffled.map((s, idx) => ({ ...s, index: shuffled.length - idx }));
+          SpinEngine.winner = shuffled[0];
+          SpinEngine.renderHistory(); 
+          SpinEngine.updateViewData();
+          
+          const toast = document.getElementById('instantToastAlert');
+          toast.className = "fixed inset-0 z-50 flex items-center justify-center pointer-events-none px-4 animate-popup";
+          setTimeout(() => toast.classList.add('hidden'), 1200);
+          return;
+        }
+
+        if (eligible.length === 0) {
+          ModalManager.open('exhaustedAlertModal');
+          return;
+        }
+
+        SpinEngine.spinning = true;
+        const winItem = AppController.shuffleArray(eligible)[0];
+        const container = document.getElementById('carouselContainer');
+        container.innerHTML = '';
+        container.style.transform = 'translateX(0px)';
+
+        const currentWidth = SpinEngine.getCardWidth();
+        const totalSlots = 52; const winIndex = 42;
+        const list = Array.from({ length: totalSlots }, (_, i) => i === winIndex ? winItem : eligible[Math.floor(Math.random() * eligible.length)]);
+
+        list.forEach(c => {
+          const card = document.createElement('div');
+          card.style.width = `${currentWidth}px`; 
+          card.style.marginRight = `${SpinEngine.cardGap}px`;
+          card.className = "shrink-0 h-16 sm:h-20 rounded-xl border bg-white dark:bg-[#090D16] flex items-center px-3 sm:px-4 border-[#CBD5E1] dark:border-darkBorder font-extrabold text-[11px] sm:text-xs uppercase truncate shadow-sm text-[#0F172A] dark:text-[#F8FAFC]";
+          card.innerText = c.name;
+          container.appendChild(card);
+        });
+
+        setTimeout(() => {
+          const cardEl = container.children[winIndex];
+          const vRect = document.getElementById('carouselViewport').getBoundingClientRect();
+          const winnerMiddle = (cardEl.getBoundingClientRect().left - container.getBoundingClientRect().left) + (cardEl.getBoundingClientRect().width / 2);
+          const finalX = -(winnerMiddle - (vRect.width / 2));
+
+          const duration = 3500; const start = performance.now();
+          AppController.particleSpeedScale = 8.0;
+
+          function animate(now) {
+            const elapsed = now - start;
+            const progress = Math.min(elapsed / duration, 1);
+            const ease = 1 - Math.pow(1 - progress, 4);
+            const currentTranslate = finalX * ease;
+            container.style.transform = `translateX(${currentTranslate}px)`;
+
+            if (progress < 1) {
+              requestAnimationFrame(animate);
+            } else {
+              AppController.particleSpeedScale = 1.0;
+              SpinEngine.winner = winItem;
+              SpinEngine.history.unshift({ ...winItem, index: SpinEngine.history.length + 1 });
+              SpinEngine.renderHistory(); 
+              SpinEngine.updateViewData();
+              
+              document.getElementById('winnerStudentName').innerText = SpinEngine.winner.name;
+              ModalManager.open('winnerModal');
+              SpinEngine.spinning = false;
+            }
+          }
+          requestAnimationFrame(animate);
+        }, 50);
+      },
+      confirmReset() {
+        this.history = [];
+        ModalManager.close('resetConfirmModal');
+        this.renderHistory();
+        this.updateViewData();
+      },
+      confirmResetExhausted() {
+        ModalManager.close('exhaustedAlertModal');
+        this.history = [];
+        this.updateViewData();
+        this.renderHistory();
+      },
+      renderHistory() {
+        const container = document.getElementById('spinHistoryContainer');
+        const empty = document.getElementById('spinHistoryEmpty');
+        const ctrl = document.getElementById('historyControls');
+        container.innerHTML = '';
+
+        document.getElementById('historyCount').innerText = this.history.length;
+        if (this.history.length === 0) { empty.classList.remove('hidden'); ctrl.classList.add('hidden'); return; }
+        empty.classList.add('hidden'); ctrl.classList.remove('hidden');
+
+        this.history.forEach(h => {
+          const div = document.createElement('div');
+          div.className = "p-2.5 sm:p-3 bg-[#F1F5F9]/50 dark:bg-[#090D16]/50 border border-[#CBD5E1] dark:border-darkBorder rounded-xl flex justify-between items-center text-xs font-bold text-[#0F172A] dark:text-[#F8FAFC]";
+          div.innerHTML = `<span class="truncate pr-2">#${h.index} - ${h.name}</span><button onclick="SpinEngine.deleteHist(${h.index})" class="text-statusError font-bold shrink-0 hover:underline p-1">Hapus</button>`;
+          container.appendChild(div);
+        });
+      },
+      deleteHist(idx) {
+        this.history = this.history.filter(h => h.index !== idx);
+        this.renderHistory();
+        this.updateViewData();
+      },
+      clearHistory() {
+        this.history = [];
+        this.renderHistory();
+        this.updateViewData();
+      },
+      getCleanText() {
+        const dateStr = new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        let txt = `*OUTPUT HASIL SPIN - MASTER LOG* 🎲\n_${dateStr}_\n\n`;
+        [...this.history].reverse().forEach((s, i) => txt += `${i + 1}. ${s.name}\n`);
+        return txt.trim();
+      },
+      copyOutput() {
+        AppController.copyToClipboard(this.getCleanText());
+        AppController.showToast("Log hasil acak berhasil disalin!");
+      },
+      shareWA() {
+        window.open(`https://wa.me/?text=${encodeURIComponent(this.getCleanText())}`, '_blank');
       }
-      return arr;
-    }
+    };
+
+    /* ---------------------------------------------------------
+       8. PRIORITY PEOPLE ENGINE MODULE
+       --------------------------------------------------------- */
+    const PriorityEngine = {
+      list: [],
+
+      renderRows() {
+        const container = document.getElementById('priorityPeopleContainer');
+        const emptyState = document.getElementById('priorityPeopleEmpty');
+        container.innerHTML = '';
+
+        if (this.list.length === 0) {
+          emptyState.classList.remove('hidden');
+          return;
+        }
+        emptyState.classList.add('hidden');
+
+        const presentStudents = AttendanceEngine.students.filter(s => s.present);
+
+        this.list.forEach((selectedId, idx) => {
+          const div = document.createElement('div');
+          div.className = "flex items-center gap-2";
+
+          const select = document.createElement('select');
+          select.className = "flex-1 bg-white dark:bg-[#090D16] border border-[#CBD5E1] dark:border-darkBorder px-3 py-2 rounded-xl text-xs font-bold text-[#0F172A] dark:text-[#F8FAFC] focus:outline-none focus:border-brandPrimary truncate";
+          select.onchange = (e) => this.updateSelection(idx, parseInt(e.target.value));
+
+          const placeholderOption = document.createElement('option');
+          placeholderOption.value = "0";
+          placeholderOption.innerText = `-- Pilih Siswa Prioritas #${idx + 1} --`;
+          if (!selectedId) placeholderOption.selected = true;
+          select.appendChild(placeholderOption);
+
+          presentStudents.forEach(st => {
+            const isSelectedElsewhere = this.list.some((id, otherIdx) => otherIdx !== idx && id === st.id);
+            if (!isSelectedElsewhere) {
+              const opt = document.createElement('option');
+              opt.value = st.id;
+              opt.innerText = st.name;
+              if (st.id === selectedId) opt.selected = true;
+              select.appendChild(opt);
+            }
+          });
+
+          const removeBtn = document.createElement('button');
+          removeBtn.className = "px-2.5 py-2 bg-statusError/10 text-statusError rounded-xl text-xs font-bold hover:bg-statusError/20 active:scale-95 transition shrink-0";
+          removeBtn.innerText = "✕";
+          removeBtn.onclick = () => this.removeRow(idx);
+
+          div.appendChild(select);
+          div.appendChild(removeBtn);
+          container.appendChild(div);
+        });
+      },
+      addRow() {
+        const presentStudents = AttendanceEngine.students.filter(s => s.present);
+        if (presentStudents.length === 0) {
+          AppController.showToast("Tidak ada siswa yang hadir!");
+          return;
+        }
+        if (this.list.length >= presentStudents.length) {
+          AppController.showToast("Semua siswa hadir sudah masuk dalam prioritas!");
+          return;
+        }
+        this.list.push(0);
+        this.renderRows();
+      },
+      removeRow(idx) {
+        this.list.splice(idx, 1);
+        this.renderRows();
+      },
+      updateSelection(index, studentId) {
+        this.list[index] = studentId;
+        this.renderRows();
+      }
+    };
+
+    /* ---------------------------------------------------------
+       9. AUTOMATIC GROUP BUILDER ENGINE MODULE
+       --------------------------------------------------------- */
+    const GroupEngine = {
+      generatedData: null,
+
+      generate() {
+        const active = AttendanceEngine.students.filter(s => s.present);
+        if (active.length < 2) { 
+          AppController.showToast("Minimal harus ada 2 siswa hadir!"); 
+          return; 
+        }
+        
+        const groupCount = parseInt(document.getElementById('groupCountInput').value) || 4;
+        const validPriorityIds = PriorityEngine.list.filter(id => id > 0 && active.some(s => s.id === id));
+        
+        if (validPriorityIds.length > groupCount) {
+          AppController.showToast(`Siswa prioritas (${validPriorityIds.length}) melebihi jumlah kelompok (${groupCount})! Maksimal ${groupCount} siswa prioritas.`);
+          return;
+        }
+
+        document.getElementById('groupsEmptyState').classList.add('hidden');
+        document.getElementById('groupOutputWrapper').classList.remove('hidden');
+
+        let groups = Array.from({ length: groupCount }, () => ({
+          members: [],
+          femaleCount: 0,
+          maleCount: 0
+        }));
+
+        const prioritySet = new Set(validPriorityIds);
+        const priorityStudents = active.filter(s => prioritySet.has(s.id));
+        const regularStudents = active.filter(s => !prioritySet.has(s.id));
+
+        if (priorityStudents.length > 0) {
+          const priorityFemales = priorityStudents.filter(s => s.gender === 'P');
+          const priorityMales = priorityStudents.filter(s => s.gender === 'L');
+          let assignedGroupIndices = new Set();
+
+          priorityFemales.forEach(pf => {
+            let bestGroupIdx = -1; let minFemales = Infinity;
+            for (let i = 0; i < groupCount; i++) {
+              if (!assignedGroupIndices.has(i) && groups[i].femaleCount < minFemales) {
+                minFemales = groups[i].femaleCount;
+                bestGroupIdx = i;
+              }
+            }
+            if (bestGroupIdx !== -1) {
+              groups[bestGroupIdx].members.push(pf);
+              groups[bestGroupIdx].femaleCount++;
+              assignedGroupIndices.add(bestGroupIdx);
+            }
+          });
+
+          priorityMales.forEach(pm => {
+            let bestGroupIdx = -1; let minMales = Infinity;
+            for (let i = 0; i < groupCount; i++) {
+              if (!assignedGroupIndices.has(i) && groups[i].maleCount < minMales) {
+                minMales = groups[i].maleCount;
+                bestGroupIdx = i;
+              }
+            }
+            if (bestGroupIdx !== -1) {
+              groups[bestGroupIdx].members.push(pm);
+              groups[bestGroupIdx].maleCount++;
+              assignedGroupIndices.add(bestGroupIdx);
+            }
+          });
+        }
+
+        const regularFemales = AppController.shuffleArray(regularStudents.filter(s => s.gender === 'P'));
+        const regularMales = AppController.shuffleArray(regularStudents.filter(s => s.gender === 'L'));
+
+        regularFemales.forEach(rf => {
+          let bestGroupIdx = 0;
+          let minFemales = groups[0].femaleCount;
+          let minTotal = groups[0].members.length;
+
+          for (let i = 1; i < groupCount; i++) {
+            const g = groups[i];
+            if (g.femaleCount < minFemales || (g.femaleCount === minFemales && g.members.length < minTotal)) {
+              minFemales = g.femaleCount;
+              minTotal = g.members.length;
+              bestGroupIdx = i;
+            }
+          }
+          groups[bestGroupIdx].members.push(rf);
+          groups[bestGroupIdx].femaleCount++;
+        });
+
+        regularMales.forEach(rm => {
+          let bestGroupIdx = 0;
+          let minMales = groups[0].maleCount;
+          let minTotal = groups[0].members.length;
+
+          for (let i = 1; i < groupCount; i++) {
+            const g = groups[i];
+            if (g.maleCount < minMales || (g.maleCount === minMales && g.members.length < minTotal)) {
+              minMales = g.maleCount;
+              minTotal = g.members.length;
+              bestGroupIdx = i;
+            }
+          }
+          groups[bestGroupIdx].members.push(rm);
+          groups[bestGroupIdx].maleCount++;
+        });
+
+        let customInput = document.getElementById('groupCustomNamesInput').value;
+        let customNames = customInput.split(',').map(n => n.trim()).filter(n => n !== "");
+
+        const finalGroupArray = groups.map(g => g.members);
+        this.generatedData = { data: finalGroupArray, names: customNames };
+        
+        this.renderUI(finalGroupArray, customNames);
+      },
+      renderUI(groupArray, customNames) {
+        const grid = document.getElementById('generatedGroupsGrid');
+        grid.innerHTML = '';
+        
+        groupArray.forEach((g, idx) => {
+          const nameLabel = (customNames && customNames[idx]) ? customNames[idx] : `KELOMPOK ${idx + 1}`;
+          const div = document.createElement('div');
+          div.className = "bg-white dark:bg-darkCard border border-[#CBD5E1] dark:border-darkBorder rounded-2xl p-4 shadow-sm transition-colors";
+          
+          let str = `
+            <div class="flex justify-between items-center border-b border-[#E2E8F0] dark:border-darkBorder pb-2 mb-2">
+              <h5 class="font-extrabold text-xs text-brandPrimary uppercase tracking-wider">${nameLabel}</h5>
+              <span class="text-[9px] font-bold text-[#64748B] dark:text-[#94A3B8] bg-[#F1F5F9] dark:bg-[#090D16] px-2 py-0.5 rounded-full">${g.length} Siswa</span>
+            </div>
+          `;
+          
+          g.forEach(s => {
+            const isPriority = PriorityEngine.list.includes(s.id);
+            str += `
+              <div class="flex items-center justify-between py-1.5 border-b last:border-0 border-[#F1F5F9] dark:border-darkBorder/50">
+                <span class="text-xs font-semibold text-[#0F172A] dark:text-[#F8FAFC] uppercase truncate">${s.name} ${isPriority ? '⭐' : ''}</span>
+              </div>
+            `;
+          });
+          
+          div.innerHTML = str;
+          grid.appendChild(div);
+        });
+      },
+      getCleanText() {
+        if (!this.generatedData) return "";
+        let txt = "*=== HASIL PEMBAGIAN KELOMPOK ===*\n\n";
+        this.generatedData.data.forEach((g, idx) => {
+          const nameLabel = (this.generatedData.names && this.generatedData.names[idx]) ? this.generatedData.names[idx] : `KELOMPOK ${idx + 1}`;
+          txt += `*${nameLabel.toUpperCase()}*\n`;
+          g.forEach(s => txt += `- ${s.name}\n`);
+          txt += "\n";
+        });
+        return txt.trim();
+      },
+      copyOutput() {
+        AppController.copyToClipboard(this.getCleanText());
+        AppController.showToast("Susunan kelompok disalin!");
+      },
+      shareWA() {
+        const text = this.getCleanText();
+        if (!text) { AppController.showToast("Belum ada data kelompok!"); return; }
+        window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+      }
+    };
+
+    /* ---------------------------------------------------------
+       10. PARTNER ACAK DUO MATCHING ENGINE MODULE
+       --------------------------------------------------------- */
+    const PartnerEngine = {
+      generatedSessions: [],
+
+      generate() {
+        const active = AttendanceEngine.students.filter(s => s.present);
+        if (active.length < 2) { 
+          AppController.showToast("Minimal harus ada 2 siswa hadir!"); 
+          return; 
+        }
+        const sessions = parseInt(document.getElementById('partnerSessionInput').value) || 1;
+
+        document.getElementById('partnersEmptyState').classList.add('hidden');
+        document.getElementById('partnerOutputWrapper').classList.remove('hidden');
+
+        this.generatedSessions = [];
+
+        for (let s = 1; s <= sessions; s++) {
+          let pool = AppController.shuffleArray(active);
+          let pairs = [];
+          while(pool.length > 1) pairs.push([pool.pop(), pool.pop()]);
+          let solo = pool.length > 0 ? pool.pop() : null;
+
+          this.generatedSessions.push({ sessionNum: s, pairs, solo });
+        }
+
+        this.renderUI();
+      },
+      renderUI() {
+        const wrapper = document.getElementById('generatedPartnersSesiList');
+        wrapper.innerHTML = '';
+
+        this.generatedSessions.forEach(s => {
+          const div = document.createElement('div');
+          div.className = "bg-white dark:bg-darkCard border border-[#CBD5E1] dark:border-darkBorder rounded-2xl p-4 shadow-sm transition-colors";
+          
+          let str = `<h5 class="font-bold text-xs text-brandAccent mb-3 text-center uppercase tracking-wider">SESI ${s.sessionNum}</h5><div class="grid grid-cols-1 sm:grid-cols-2 gap-2">`;
+          s.pairs.forEach(p => {
+            str += `<div class="p-2.5 bg-[#F1F5F9]/70 dark:bg-[#090D16]/70 rounded-xl border border-[#CBD5E1] dark:border-darkBorder text-center text-xs font-bold uppercase truncate text-[#0F172A] dark:text-[#F8FAFC]">${p[0].name} ↔ ${p[1].name}</div>`;
+          });
+          if (s.solo) {
+            str += `<div class="p-2.5 bg-statusError/10 text-statusError text-center text-xs font-bold rounded-xl col-span-full border border-statusError/20">⚠️ SOLO: ${s.solo.name}</div>`;
+          }
+          str += `</div>`;
+          div.innerHTML = str;
+          wrapper.appendChild(div);
+        });
+      },
+      getCleanText() {
+        let txt = "*=== HASIL ACAK PASANGAN MATCHING ===*\n\n";
+        this.generatedSessions.forEach(s => {
+          txt += `*SESI ${s.sessionNum}*\n`;
+          s.pairs.forEach(p => txt += `${p[0].name} ↔ ${p[1].name}\n`);
+          if (s.solo) txt += `${s.solo.name} (SOLO)\n`;
+          txt += "\n";
+        });
+        return txt.trim();
+      },
+      copyOutput() {
+        AppController.copyToClipboard(this.getCleanText());
+        AppController.showToast("Susunan partner matching disalin!");
+      },
+      shareWA() {
+        const text = this.getCleanText();
+        if (!text) { AppController.showToast("Belum ada data partner!"); return; }
+        window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+      }
+    };
+
+    /* ---------------------------------------------------------
+       11. MAIN APP CONTROLLER & SYSTEM ORCHESTRATOR
+       --------------------------------------------------------- */
+    const AppController = {
+      currentTab: 'absen',
+      particleSpeedScale: 1.0,
+
+      init() {
+        ThemeEngine.init();
+        AttendanceEngine.init();
+        
+        SlotEngine.renderSlots('spin');
+        SlotEngine.renderSlots('groups');
+        SlotEngine.renderSlots('partners');
+
+        this.initCanvasBackground();
+      },
+      switchTab(tabId) {
+        if (SpinEngine.spinning) return;
+        this.currentTab = tabId;
+
+        ['absen', 'spin', 'groups', 'partners'].forEach(id => {
+          const btn = document.getElementById(`navBtn-${id}`);
+          if (id === tabId) {
+            btn.className = "flex-1 md:flex-none px-4 py-2 rounded-lg text-xs font-bold transition-all whitespace-nowrap bg-brandPrimary text-white shadow-sm active:scale-95";
+          } else {
+            btn.className = "flex-1 md:flex-none px-4 py-2 rounded-lg text-xs font-bold transition-all whitespace-nowrap text-[#64748B] dark:text-[#94A3B8] hover:text-[#0F172A] dark:hover:text-white active:scale-95";
+          }
+        });
+
+        ['absen', 'spin', 'groups', 'partners'].forEach(id => {
+          const div = document.getElementById(`tabContent-${id}`);
+          if (id === tabId) div.classList.remove('hidden');
+          else div.classList.add('hidden');
+        });
+
+        AttendanceEngine.syncPools();
+        if (tabId === 'spin') SpinEngine.updateViewData();
+      },
+      showToast(msg) {
+        const el = document.getElementById('toastAlert');
+        document.getElementById('toastMessage').innerText = msg;
+        el.classList.remove('hidden');
+        setTimeout(() => el.classList.add('hidden'), 2500);
+      },
+      copyToClipboard(text) {
+        try {
+          const textarea = document.createElement('textarea');
+          textarea.value = text;
+          textarea.style.position = 'fixed';
+          textarea.style.left = '-9999px';
+          textarea.style.top = '0';
+          document.body.appendChild(textarea);
+          textarea.focus();
+          textarea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textarea);
+        } catch (e) {
+          if (navigator.clipboard) navigator.clipboard.writeText(text);
+        }
+      },
+      shuffleArray(array) {
+        let arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      },
+      initCanvasBackground() {
+        const canvas = document.getElementById('particleCanvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        
+        function resize() {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        const particleCount = window.innerWidth < 640 ? 15 : 28;
+        const dots = Array.from({ length: particleCount }, () => ({ 
+          x: Math.random() * canvas.width, 
+          y: Math.random() * canvas.height, 
+          r: Math.random() * 2 + 1, 
+          sx: (Math.random() - 0.5) * 0.25 
+        }));
+
+        function draw() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.fillStyle = ThemeEngine.currentTheme === 'dark' ? '#3B82F6' : '#2563EB';
+          ctx.globalAlpha = ThemeEngine.currentTheme === 'dark' ? 0.25 : 0.12;
+
+          dots.forEach(d => {
+            d.x += d.sx * AppController.particleSpeedScale;
+            if (d.x < 0 || d.x > canvas.width) d.x = Math.random() * canvas.width;
+            ctx.beginPath();
+            ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+            ctx.fill();
+          });
+          requestAnimationFrame(draw);
+        }
+        draw();
+      }
+    };
+
+    // Entry Point Execution
+    window.onload = function() {
+      AppController.init();
+    };
   </script>
 </body>
 </html>
